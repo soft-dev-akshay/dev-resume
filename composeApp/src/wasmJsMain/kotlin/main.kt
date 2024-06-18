@@ -15,8 +15,9 @@ fun main() {
 @Composable
 fun starter() {
     MaterialTheme {
-//        homePage()
+        //homePage()
         allPage()
+        //sideInfo()
     }
 }
 
