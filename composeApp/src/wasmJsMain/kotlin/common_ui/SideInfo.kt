@@ -31,7 +31,7 @@ import data.SocialData
 import data.socials
 import org.jetbrains.compose.resources.painterResource
 
-@OptIn(ExperimentalFoundationApi::class)
+
 @Composable
 fun sideInfo(modifier: Modifier = Modifier) {
 
@@ -41,7 +41,10 @@ fun sideInfo(modifier: Modifier = Modifier) {
 
     Column (modifier = modifier
         .fillMaxSize()
-        .background(color = Color(0XFF202124))) {
+
+        .padding(horizontal = 30.dp, vertical = 30.dp)
+        .background(color = Color(0XFF202124))
+    ) {
 
         Row (verticalAlignment = Alignment.CenterVertically) {
             Image(
@@ -69,9 +72,7 @@ fun sideInfo(modifier: Modifier = Modifier) {
                         color = Color(0XFFBDC1C6)
                     )
 
-                    Canvas(modifier = modifier.padding(8.dp)) {
-                        drawCircle(color = Color(0XFFBDC1C6), radius = 4f)
-                    }
+                    smallDot()
 
                     Text(
                         text = "Android",
@@ -123,7 +124,13 @@ fun sideInfo(modifier: Modifier = Modifier) {
         }
 
         Text(
-            text = "I am a passionate and skilled Android developer with a strong interest in the latest technologies, such as Kotlin. I am currently working as a Senior Android Developer, and I am excited to be pursuing my goal of becoming a Professional Android developer at the Parent company. I am confident that the Skills and experience I have gained in my current role will prepare me well for the next stage of my career.",
+            text = "I am a passionate and skilled Android developer with a " +
+                    "\nstrong interest in the latest technologies, such as Kotlin. " +
+                    "\nI am currently working as a Senior Android Developer, and \n" +
+                    "I am excited to be pursuing my goal of becoming a Professional \n" +
+                    "Android developer at the Parent company. I am confident that the \n" +
+                    "Skills and experience I have gained in my current role will prepare \n" +
+                    "me well for the next stage of my career.",
             color = Color(0XFFBDC1C6)
         )
 
@@ -132,9 +139,9 @@ fun sideInfo(modifier: Modifier = Modifier) {
         Text(text = buildAnnotatedString {
             withStyle(
                 SpanStyle(
-                fontWeight = FontWeight.W800,
-                color = Color.White
-            )
+                    fontWeight = FontWeight.W800,
+                    color = Color.White
+                )
             ) {
                 append("Born: ")
             }
@@ -152,9 +159,9 @@ fun sideInfo(modifier: Modifier = Modifier) {
         Text(text = buildAnnotatedString {
             withStyle(
                 SpanStyle(
-                fontWeight = FontWeight.W800,
-                color = Color.White
-            )
+                    fontWeight = FontWeight.W800,
+                    color = Color.White
+                )
             ) {
                 append("Education: ")
             }
@@ -171,9 +178,9 @@ fun sideInfo(modifier: Modifier = Modifier) {
         Text(text = buildAnnotatedString {
             withStyle(
                 SpanStyle(
-                fontWeight = FontWeight.W800,
-                color = Color.White
-            )
+                    fontWeight = FontWeight.W800,
+                    color = Color.White
+                )
             ) {
                 append("Experience: ")
             }
@@ -187,9 +194,9 @@ fun sideInfo(modifier: Modifier = Modifier) {
         Text(text = buildAnnotatedString {
             withStyle(
                 SpanStyle(
-                fontWeight = FontWeight.W800,
-                color = Color.White
-            )
+                    fontWeight = FontWeight.W800,
+                    color = Color.White
+                )
             ) {
                 append("Awards: ")
             }
@@ -203,9 +210,9 @@ fun sideInfo(modifier: Modifier = Modifier) {
         Text(text = buildAnnotatedString {
             withStyle(
                 SpanStyle(
-                fontWeight = FontWeight.W800,
-                color = Color.White
-            )
+                    fontWeight = FontWeight.W800,
+                    color = Color.White
+                )
             ) {
                 append("Tech Stack: ")
             }
@@ -215,7 +222,7 @@ fun sideInfo(modifier: Modifier = Modifier) {
             }
 
             withStyle(style = SpanStyle(color = Color.White)) {
-                append("Firebase, RestAPI, MySQL")
+                append("\nFirebase, RestAPI, MySQL")
             }
         })
 
@@ -224,9 +231,9 @@ fun sideInfo(modifier: Modifier = Modifier) {
         Text(text = buildAnnotatedString {
             withStyle(
                 SpanStyle(
-                fontWeight = FontWeight.W800,
-                color = Color.White
-            )
+                    fontWeight = FontWeight.W800,
+                    color = Color.White
+                )
             ) {
                 append("Android Apps: ")
             }
@@ -236,7 +243,7 @@ fun sideInfo(modifier: Modifier = Modifier) {
             }
 
             withStyle(style = SpanStyle(color = Color.White)) {
-                append("Project Mamta, Parrot4Business, CreditHive POS")
+                append("\nProject Mamta, Parrot4Business, CreditHive POS")
             }
         })
 
@@ -245,14 +252,14 @@ fun sideInfo(modifier: Modifier = Modifier) {
         Text(text = buildAnnotatedString {
             withStyle(
                 SpanStyle(
-                fontWeight = FontWeight.W800,
-                color = Color.White
-            )
+                    fontWeight = FontWeight.W800,
+                    color = Color.White
+                )
             ) {
                 append("Area worked on: ")
             }
             withStyle(style = SpanStyle(color = Color.White)) {
-                append("Goods Delivery, Food and Drink, Food Delivery, Health, Finance, Medical, Educational")
+                append("Goods Delivery, Food and Drink, Food Delivery, Health, Finance, \nMedical, Educational")
             }
         })
 
@@ -261,9 +268,9 @@ fun sideInfo(modifier: Modifier = Modifier) {
         Text(text = buildAnnotatedString {
             withStyle(
                 SpanStyle(
-                fontWeight = FontWeight.W800,
-                color = Color.White
-            )
+                    fontWeight = FontWeight.W800,
+                    color = Color.White
+                )
             ) {
                 append("Interest: ")
             }
@@ -309,23 +316,23 @@ fun sideInfo(modifier: Modifier = Modifier) {
 //val uriHandler = LocalUriHandler.current
 //uriHandler.openUri(socialData.url)
 
-@OptIn(ExperimentalFoundationApi::class)
+
 @Composable
 fun socialView(
     socialData: SocialData,
-    onIconClicked: (SocialData) -> Unit,
+    onIconClicked: () -> Unit,
     modifier: Modifier = Modifier) {
 
 
     Image(
         painter = painterResource(socialData.icon),
         contentDescription = null,
-        modifier = modifier.size(50.dp)
+        modifier = modifier
+            .size(50.dp)
             .padding(horizontal = 8.dp)
-            .onClick {
-                onIconClicked(socialData)
+            .clickable {
+                onIconClicked()
             }
     )
 
 }
-

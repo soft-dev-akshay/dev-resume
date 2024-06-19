@@ -27,7 +27,6 @@ fun topMenu(
     onClickedProfile: () -> Unit,
     modifier: Modifier = Modifier) {
 
-
     Row (verticalAlignment = Alignment.CenterVertically, modifier = modifier.padding(end = 10.dp)){
         Text(
             text = "Gmail",
@@ -62,5 +61,4 @@ fun topMenu(
                 .onClick { onClickedProfile() }
         )
     }
-
 }

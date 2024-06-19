@@ -3,7 +3,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.ComposeViewport
 import kotlinx.browser.document
-import pages.allPage
+import pages.searchPage
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
@@ -16,7 +16,7 @@ fun main() {
 fun starter() {
     MaterialTheme {
         //homePage()
-        allPage()
+        searchPage()
         //sideInfo()
     }
 }

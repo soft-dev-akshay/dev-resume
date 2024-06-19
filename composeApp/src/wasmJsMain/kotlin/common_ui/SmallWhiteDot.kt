@@ -7,10 +7,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
-
 @Composable
 fun smallDot(modifier: Modifier = Modifier) {
     Canvas(modifier.padding(horizontal = 8.dp)) {
-        drawCircle(color = Color.White, radius = 2f)
+        drawCircle(color = Color.White, radius = 3f)
     }
 }
