@@ -18,6 +18,7 @@ import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.TextStyle
@@ -68,7 +69,9 @@ fun searchPage(modifier: Modifier = Modifier) {
                         .padding(10.dp)
                         .padding(start = 10.dp)
                         .weight(1f),
-                    textStyle = TextStyle(color = Color.White, fontSize = 14.sp)
+                    textStyle = TextStyle(color = Color.White, fontSize = 14.sp),
+                    singleLine = true,
+                    cursorBrush = Brush.linearGradient(listOf(Color.White, Color.White))
                 )
 
 

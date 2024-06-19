@@ -124,13 +124,11 @@ fun sideInfo(modifier: Modifier = Modifier) {
         }
 
         Text(
-            text = "I am a passionate and skilled Android developer with a " +
-                    "\nstrong interest in the latest technologies, such as Kotlin. " +
-                    "\nI am currently working as a Senior Android Developer, and \n" +
-                    "I am excited to be pursuing my goal of becoming a Professional \n" +
-                    "Android developer at the Parent company. I am confident that the \n" +
-                    "Skills and experience I have gained in my current role will prepare \n" +
-                    "me well for the next stage of my career.",
+            text = "I am a passionate and skilled Android developer with a strong interest in the " +
+                    "\nlatest technologies, such as Kotlin. I am currently working as a Software Developer," +
+                    "\nand I am excited to be pursuing my goal of becoming a Professional Android " +
+                    "\ndeveloper at the Parent company. I am confident that the Skills and experience I have" +
+                    "\ngained in my current role will prepare me well for the next stage of my career.",
             color = Color(0XFFBDC1C6)
         )
 

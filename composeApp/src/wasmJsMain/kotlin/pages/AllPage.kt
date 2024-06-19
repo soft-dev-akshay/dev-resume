@@ -8,12 +8,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -22,10 +21,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import common_ui.questionsItem
-import common_ui.sideInfo
-import common_ui.smallDot
-import common_ui.verticalLine
+import common_ui.*
 import data.PageAllItemData
 import data.pageAllMainData
 import data.pageAllQuestionsList
@@ -35,22 +31,43 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun all(modifier: Modifier = Modifier) {
 
+    var openId by remember { mutableIntStateOf(-1) }
     Row (modifier = modifier.fillMaxWidth()) {
-        Column (modifier = modifier.weight(1f)
-            .scrollable(rememberScrollState(), orientation = Orientation.Vertical,enabled = true)
-            //.verticalScroll(rememberScrollState(),enabled = true)
 
-        ){
+        Column (modifier = modifier.weight(1f)) {
 
             //============================LATEST COMPANY, PROJECT, EDUCATION=================================
             LazyColumn(modifier = modifier.padding(top = 10.dp)) {
+
                 items(pageAllMainData) {
                     latestCommon(it,modifier)
                 }
-            }
 
-            //============================QUESTIONS=========================================================
-            questionnaire(modifier)
+                item {
+                    Text(
+                        text = "People also ask",
+                        color = Color(0XFFE8E8E8),
+                        fontSize = 22.sp,
+                        modifier = modifier.padding(vertical = 12.dp)
+                    )
+
+                    horizontalLine(modifier.padding(vertical = 6.dp))
+
+                }
+
+                items(pageAllQuestionsList) { questions ->
+                    questionsItem(
+                        question = questions, {id ->
+                            pageAllQuestionsList.forEach {
+                                if (it.id == id) {
+                                    it.isOpen = !it.isOpen
+                                }
+                            }
+                            openId = id
+                        }
+                    )
+                }
+            }
         }
 
         verticalLine(modifier = modifier.padding(vertical = 30.dp))
@@ -143,25 +160,6 @@ fun latestCommon(
         }
     }
 }
-
-@Composable
-fun questionnaire(modifier: Modifier = Modifier) {
-    Column {
-        Text(
-            text = "People also ask",
-            color = Color(0XFFE8E8E8),
-            fontSize = 16.sp,
-            modifier = modifier.padding(top = 22.dp)
-        )
-
-        LazyColumn(userScrollEnabled = false) {
-            items(pageAllQuestionsList) {
-                questionsItem(question = it)
-            }
-        }
-    }
-}
-
 
 
 

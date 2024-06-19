@@ -63,7 +63,8 @@ fun googleSearchBar(
                 colors = TextFieldDefaults.textFieldColors(
                     backgroundColor = Color.Transparent,
                     focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent, cursorColor = Color.White
+                    unfocusedIndicatorColor = Color.Transparent,
+                    cursorColor = Color.White
                 ),
                 shape = shape,
                 singleLine = true,

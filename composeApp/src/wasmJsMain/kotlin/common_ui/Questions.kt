@@ -1,11 +1,7 @@
 package common_ui
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
@@ -21,11 +17,17 @@ import androidx.compose.ui.unit.sp
 import data.PageAllQuestion
 
 @Composable
-fun questionsItem(question: PageAllQuestion, modifier: Modifier = Modifier) {
+fun questionsItem(
+    question: PageAllQuestion,
+    onClickOpen: (Int) -> Unit,
+    modifier: Modifier = Modifier) {
 
     Column (modifier = modifier.padding(end = 8.dp)){
 
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center) {
+
             Text(
                 text = question.question,
                 modifier = modifier.weight(1f),
@@ -33,14 +35,14 @@ fun questionsItem(question: PageAllQuestion, modifier: Modifier = Modifier) {
                 color = Color.White
             )
 
-            IconButton(onClick = {}, modifier = modifier
-                .background(
-                    color = Color(0XFF313335),
-                    shape = CircleShape
-                )
-                .padding(2.dp)
-                .size(28.dp)
-
+            IconButton(
+                onClick = { onClickOpen(question.id) },
+                modifier = modifier
+                    .background(
+                        color = Color(0XFF313335),
+                        shape = CircleShape)
+                    .padding(2.dp)
+                    .size(28.dp)
             ) {
                 Icon(
                     imageVector = Icons.Default.KeyboardArrowDown,
