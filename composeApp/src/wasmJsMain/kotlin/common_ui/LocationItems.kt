@@ -1,11 +1,10 @@
 package common_ui
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Directions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -21,6 +20,7 @@ import aoogle.composeapp.generated.resources.ic_globe_asia
 import org.jetbrains.compose.resources.painterResource
 
 
+/*
 @Composable
 fun locationItems(mapItem: MapItemData, modifier: Modifier = Modifier) {
 
@@ -63,7 +63,6 @@ fun locationItems(mapItem: MapItemData, modifier: Modifier = Modifier) {
                                 fontSize = 12.sp
                             )
                         }
-
                     }
                 }
 
@@ -78,7 +77,6 @@ fun locationItems(mapItem: MapItemData, modifier: Modifier = Modifier) {
                 Column (modifier = modifier
                     .padding(horizontal = 8.dp),
                     horizontalAlignment = Alignment.CenterHorizontally) {
-
 
                     IconButton(onClick = {
                         uriHandler.openUri(it)
@@ -143,4 +141,130 @@ fun locationItems(mapItem: MapItemData, modifier: Modifier = Modifier) {
         }
     }
 
+}
+*/
+
+@Composable
+fun locationItems(
+    modifier: Modifier = Modifier,
+    menuItem: MapItemData = commonMapItemsList.first()) {
+
+    val uriHandler = LocalUriHandler.current
+
+    Column {
+        horizontalLine(modifier = modifier.padding(vertical = 14.dp))
+        Row (verticalAlignment = Alignment.CenterVertically){
+
+            Column (modifier = modifier.weight(1f)) {
+
+                Text(
+                    text = menuItem.title,
+                    color = Color(0XFFE8E8E8),
+                    fontSize = 16.sp,
+                )
+
+                Text(
+                    text = menuItem.address,
+                    color = Color(0XFFBDC1C6),
+                    fontSize = 12.sp
+                )
+
+                Row (verticalAlignment = Alignment.CenterVertically){
+
+                    if(menuItem.rating != 0) {
+
+                        Text(
+                            text = menuItem.rating.toDouble().toString(),
+                            color = Color(0XFFBDC1C6)
+                        )
+
+                        Spacer(modifier.padding(start = 2.dp))
+                        ratingBar()
+
+                        smallDot()
+
+                        menuItem.type?.let {
+                            Text(
+                                text = it,
+                                color = Color(0XFFBDC1C6),
+                                fontSize = 12.sp
+                            )
+                        }
+                    }
+                }
+
+                Text(
+                    text = menuItem.hours,
+                    color = Color(0XFFBDC1C6),
+                    fontSize = 12.sp
+                )
+            }
+
+            menuItem.websiteUrl?.let {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = modifier.padding(horizontal = 8.dp)
+
+                ) {
+
+                    IconButton({
+                        uriHandler.openUri(it)
+                    }, modifier = modifier
+                        .border(
+                            width = 1.dp,
+                            shape = CircleShape,
+                            color = Color(0XFFB1C5FF))
+                        .size(36.dp)
+                    ) {
+                        Icon(
+                            painter = painterResource(Res.drawable.ic_globe_asia),
+                            contentDescription = null,
+                            tint = Color(0XFFB1C5FF)
+                        )
+                    }
+
+                    Spacer(modifier = modifier.padding(vertical = 1.dp))
+
+                    Text(
+                        text = "Website",
+                        color = Color(0XFFB1C5FF)
+                    )
+                }
+            }
+
+            menuItem.directionUrl?.let {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = modifier.padding(horizontal = 8.dp
+                    )
+                ) {
+
+                    IconButton({
+                        uriHandler.openUri(it)
+                    }, modifier = modifier
+                        .border(
+                            width = 1.dp,
+                            shape = CircleShape,
+                            color = Color(0XFFB1C5FF))
+                        .size(36.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Directions,
+                            contentDescription = null,
+                            tint = Color(0XFFB1C5FF)
+                        )
+                    }
+
+                    Spacer(modifier = modifier.padding(vertical = 1.dp))
+
+                    Text(
+                        text = "Direction",
+                        color = Color(0XFFB1C5FF)
+                    )
+                }
+            }
+        }
+
+
+    }
 }

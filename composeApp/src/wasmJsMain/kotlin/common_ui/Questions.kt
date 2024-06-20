@@ -14,22 +14,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import data.PageAllQuestion
+import data.QuestionsTemplates
 import utils.showSnack
 
+
 @Composable
-fun questionsItem(
-    question: PageAllQuestion,
+fun questionsItem (
+    question: QuestionsTemplates,
     currentId: Int,
     onClickOpen: (Int) -> Unit,
     modifier: Modifier = Modifier) {
 
-    Column (modifier = modifier.padding(end = 8.dp)){
+    Column (
+        modifier = modifier.padding(
+            top = 6.dp,
+            bottom = 6.dp,
+            end = 6.dp)
 
-        Row(
-            modifier = modifier.padding(top = 6.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center) {
+    ){
+
+        Row (verticalAlignment = Alignment.CenterVertically) {
 
             Text(
                 text = question.question,
@@ -39,11 +43,12 @@ fun questionsItem(
             )
 
             IconButton(
-                onClick = { onClickOpen(question.id) },
+                onClick = { onClickOpen(0) },
                 modifier = modifier
                     .background(
                         color = Color(0XFF313335),
-                        shape = CircleShape)
+                        shape = CircleShape
+                    )
                     .padding(2.dp)
                     .size(24.dp)
             ) {
@@ -56,16 +61,13 @@ fun questionsItem(
             }
         }
 
-        Spacer(modifier = modifier.padding(vertical = 3.dp))
-
-        if (question.isOpen || currentId == question.id) {
+        if (question.isOpen || currentId == 1) {
             Text(
                 text = question.answer,
                 color = Color.White,
                 fontSize = 12.sp
             )
         }
-
-        horizontalLine(modifier = modifier.padding(vertical = 6.dp))
     }
+    horizontalLine()
 }

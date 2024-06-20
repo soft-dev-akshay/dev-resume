@@ -139,7 +139,9 @@ fun searchPage(modifier: Modifier = Modifier) {
         Row (modifier = modifier.padding(start = 200.dp)) {
 
             when(currentId) {
-                1 -> {}
+                1 -> {
+                    experience(modifier)
+                }
                 2 -> {}
                 3 -> {}
                 4 -> {}

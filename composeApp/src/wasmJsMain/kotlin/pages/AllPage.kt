@@ -49,11 +49,11 @@ fun all(modifier: Modifier = Modifier) {
                     Text(
                         text = "People also ask",
                         color = Color(0XFFE8E8E8),
-                        fontSize = 22.sp,
-                        modifier = modifier.padding(vertical = 12.dp)
+                        fontSize = 20.sp,
+                        modifier = modifier.padding(top = 12.dp)
                     )
 
-                    horizontalLine(modifier.padding(vertical = 6.dp))
+                    horizontalLine(modifier.padding(top = 6.dp))
                 }
 
                 items(questionsList) { questions ->
@@ -71,8 +71,8 @@ fun all(modifier: Modifier = Modifier) {
                     Text(
                         text = "Locations",
                         color = Color(0XFFE8E8E8),
-                        fontSize = 22.sp,
-                        modifier = modifier.padding(top = 14.dp)
+                        fontSize = 20.sp,
+                        modifier = modifier.padding(top = 26.dp)
                     )
                 }
 
@@ -82,17 +82,20 @@ fun all(modifier: Modifier = Modifier) {
                         modifier = modifier
                             .fillMaxWidth()
                             .height(250.dp)
-                            .padding(4.dp)
+                            .padding(top = 8.dp)
                             .clip(RoundedCornerShape(20.dp)),
                         contentScale = ContentScale.Crop,
                     )
-
-                    horizontalLine(modifier = modifier.padding(vertical = 6.dp))
                 }
 
                 items(commonMapItemsList) {
-                    locationItems(mapItem = it)
+                    locationItems(modifier = modifier, menuItem = it)
                 }
+
+                item {
+                    Spacer(modifier = modifier.padding(vertical = 100.dp))
+                }
+
             }
         }
 
@@ -185,6 +188,7 @@ fun latestCommon(
             )
         }
     }
+
 }
 
 
