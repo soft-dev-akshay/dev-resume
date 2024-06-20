@@ -15,16 +15,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import data.PageAllQuestion
+import utils.showSnack
 
 @Composable
 fun questionsItem(
     question: PageAllQuestion,
+    currentId: Int,
     onClickOpen: (Int) -> Unit,
     modifier: Modifier = Modifier) {
 
     Column (modifier = modifier.padding(end = 8.dp)){
 
         Row(
+            modifier = modifier.padding(top = 6.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center) {
 
@@ -42,7 +45,7 @@ fun questionsItem(
                         color = Color(0XFF313335),
                         shape = CircleShape)
                     .padding(2.dp)
-                    .size(28.dp)
+                    .size(24.dp)
             ) {
                 Icon(
                     imageVector = Icons.Default.KeyboardArrowDown,
@@ -53,9 +56,9 @@ fun questionsItem(
             }
         }
 
-        Spacer(modifier = modifier.padding(vertical = 4.dp))
+        Spacer(modifier = modifier.padding(vertical = 3.dp))
 
-        if (question.isOpen) {
+        if (question.isOpen || currentId == question.id) {
             Text(
                 text = question.answer,
                 color = Color.White,
@@ -63,6 +66,6 @@ fun questionsItem(
             )
         }
 
-        horizontalLine(modifier = modifier.padding(vertical = 8.dp))
+        horizontalLine(modifier = modifier.padding(vertical = 6.dp))
     }
 }

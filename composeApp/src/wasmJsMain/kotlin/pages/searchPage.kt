@@ -127,7 +127,8 @@ fun searchPage(modifier: Modifier = Modifier) {
         LazyRow(modifier = modifier.padding(start = 200.dp)) {
             items(searchMenu) {
                     menuItem(menu = it,
-                    currentId = currentId, onMenuClicked = {id ->
+                    currentId = currentId,
+                        onMenuClicked = {id ->
                         currentId = id
                     })
             }

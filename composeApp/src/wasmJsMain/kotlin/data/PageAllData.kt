@@ -58,25 +58,25 @@ data class PageAllQuestion(val id: Int, val question: String, val answer: String
 
 val pageAllQuestionsList = listOf(
     PageAllQuestion(
-        id = 1,
+        id = 0,
         question = "can you tell me something about yourself?",
-        answer = "Myself Akshay Pawar having 3+ years of experience to worked on Native Android with Kotlin, I have worked on 15+ apps among them few are existing and most of then are from scratch and hosted 10+ apps on Plays tore including self crafted app",
+        answer = "Myself Akshay Pawar having 3+ years of experience to worked on Native Android with Kotlin, I have worked on 15+ apps among them few are existing and most of then are from scratch and hosted 10+ apps on Play store including self crafted app",
     ),
 
     PageAllQuestion(
-        id = 2,
+        id = 1,
         question = "How many project you have done?",
         answer = "I have worked on around 20 projects till now, few of them are form existing to make it stable and most of them are from scratch including finance, security, social media, food and drink, health, educational etc domain."
     ),
 
     PageAllQuestion(
-        id = 3,
+        id = 2,
         question = "What is your tech-stack?",
         answer = "I usually preferred to work mostly on kotlin, apart from this I also worked on XML, MYSQL, Firebase, HTML, CSS, JS, Java"
     ),
 
     PageAllQuestion(
-        id = 4,
+        id = 3,
         question = "Why Kotlin?",
         answer = "When I started my career, In 2017 Google has announced Kotlin as supportive language for android, I seen kotlin as future because Kotlin has multiple flavor to worked on like Android, KMM(KMP), Server-Side (Ktor), Data Science, and Java Interoperable, That's Why Kotlin 😍"
     )

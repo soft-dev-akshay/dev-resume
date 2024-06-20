@@ -1,13 +1,11 @@
 package pages
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material3.Icon
@@ -21,6 +19,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import aoogle.composeapp.generated.resources.Res
+import aoogle.composeapp.generated.resources.map_image
 import common_ui.*
 import data.PageAllItemData
 import data.pageAllMainData
@@ -31,7 +31,9 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun all(modifier: Modifier = Modifier) {
 
-    var openId by remember { mutableIntStateOf(-1) }
+    val questionsList = remember { pageAllQuestionsList.toMutableStateList() }
+    var currentId by remember { mutableIntStateOf(-1) }
+
     Row (modifier = modifier.fillMaxWidth()) {
 
         Column (modifier = modifier.weight(1f)) {
@@ -52,25 +54,49 @@ fun all(modifier: Modifier = Modifier) {
                     )
 
                     horizontalLine(modifier.padding(vertical = 6.dp))
-
                 }
 
-                items(pageAllQuestionsList) { questions ->
+                items(questionsList) { questions ->
+
                     questionsItem(
-                        question = questions, {id ->
-                            pageAllQuestionsList.forEach {
-                                if (it.id == id) {
-                                    it.isOpen = !it.isOpen
-                                }
-                            }
-                            openId = id
+                        question = questions,
+                        currentId,
+                        onClickOpen = { id ->
+                            currentId = if (currentId == id) -1 else id
                         }
                     )
+                }
+
+                item {
+                    Text(
+                        text = "Locations",
+                        color = Color(0XFFE8E8E8),
+                        fontSize = 22.sp,
+                        modifier = modifier.padding(top = 14.dp)
+                    )
+                }
+
+                item {
+                    Image(painter = painterResource(Res.drawable.map_image),
+                        contentDescription = "",
+                        modifier = modifier
+                            .fillMaxWidth()
+                            .height(250.dp)
+                            .padding(4.dp)
+                            .clip(RoundedCornerShape(20.dp)),
+                        contentScale = ContentScale.Crop,
+                    )
+
+                    horizontalLine(modifier = modifier.padding(vertical = 6.dp))
+                }
+
+                items(commonMapItemsList) {
+                    locationItems(mapItem = it)
                 }
             }
         }
 
-        verticalLine(modifier = modifier.padding(vertical = 30.dp))
+        verticalLine(modifier = modifier.padding(horizontal = 10.dp, vertical = 30.dp))
 
         Column (modifier = modifier.weight(1f)){
             sideInfo()
