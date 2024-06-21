@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.sp
 import aoogle.composeapp.generated.resources.Res
 import aoogle.composeapp.generated.resources.ic_globe_asia
 import org.jetbrains.compose.resources.painterResource
+import utils.showSnack
 
 
 /*
@@ -152,7 +153,9 @@ fun locationItems(
     val uriHandler = LocalUriHandler.current
 
     Column {
+
         horizontalLine(modifier = modifier.padding(vertical = 14.dp))
+
         Row (verticalAlignment = Alignment.CenterVertically){
 
             Column (modifier = modifier.weight(1f)) {
@@ -169,9 +172,9 @@ fun locationItems(
                     fontSize = 12.sp
                 )
 
-                Row (verticalAlignment = Alignment.CenterVertically){
+                if(menuItem.rating != 0) {
 
-                    if(menuItem.rating != 0) {
+                    Row (verticalAlignment = Alignment.CenterVertically) {
 
                         Text(
                             text = menuItem.rating.toDouble().toString(),
@@ -264,7 +267,5 @@ fun locationItems(
                 }
             }
         }
-
-
     }
 }

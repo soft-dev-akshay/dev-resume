@@ -4,13 +4,19 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import aoogle.composeapp.generated.resources.Res
@@ -20,7 +26,7 @@ import data.*
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun experience(modifier: Modifier = Modifier) {
+fun project(modifier: Modifier = Modifier) {
 
     val questionsList = remember { pageAllQuestionsList.toMutableStateList() }
     var currentId by remember { mutableIntStateOf(-1) }
@@ -32,8 +38,8 @@ fun experience(modifier: Modifier = Modifier) {
             //============================LATEST COMPANY, PROJECT, EDUCATION=================================
             LazyColumn(modifier = modifier.padding(top = 10.dp)) {
 
-                items(experienceList) {
-                    experienceItems(it,modifier)
+                items(projectsListPre) {
+                    latestCommon(it,modifier)
                 }
 
                 item {
@@ -47,7 +53,7 @@ fun experience(modifier: Modifier = Modifier) {
                     horizontalLine(modifier.padding(top = 6.dp))
                 }
 
-                items(experienceQuestionsList) { questions ->
+                items(projectsQuestions) { questions ->
 
                     questionsItem(
                         question = questions,
@@ -59,28 +65,10 @@ fun experience(modifier: Modifier = Modifier) {
                 }
 
                 item {
-                    Text(
-                        text = "Office Places",
-                        color = Color(0XFFE8E8E8),
-                        fontSize = 20.sp,
-                        modifier = modifier.padding(top = 26.dp)
-                    )
+                    Spacer(modifier = modifier.padding(top = 10.dp))
                 }
-
-                item {
-                    Image(painter = painterResource(Res.drawable.map_image),
-                        contentDescription = "",
-                        modifier = modifier
-                            .fillMaxWidth()
-                            .height(250.dp)
-                            .padding(top = 8.dp)
-                            .clip(RoundedCornerShape(20.dp)),
-                        contentScale = ContentScale.Crop,
-                    )
-                }
-
-                items(experienceMapList) {
-                    locationItems(menuItem = it, modifier = modifier)
+                items(projectsListPost) {
+                    latestCommon(it,modifier)
                 }
 
                 item {

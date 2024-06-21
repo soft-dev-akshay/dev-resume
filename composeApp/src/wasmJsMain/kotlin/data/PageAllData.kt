@@ -14,7 +14,9 @@ data class PageAllItemData(
     val desc: String,
     val duration: String,
     val isFullTime: Boolean,
-    val location: String
+    val location: String,
+    val extraStr: String = "",
+    val isUrlSafe: Boolean = true
 )
 
 val pageAllMainData = listOf(

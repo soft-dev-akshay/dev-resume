@@ -2,9 +2,12 @@ package data
 
 import aoogle.composeapp.generated.resources.Res
 import aoogle.composeapp.generated.resources.img_mobile_llc
-import kotlinx.browser.window
+import common_ui.MapItemData
 import kotlinx.datetime.*
 import org.jetbrains.compose.resources.DrawableResource
+import utils.getActualExperience
+import utils.getFreelanceExperience
+import utils.getTotalExperience
 import kotlin.time.*
 
 data class ExperienceData (
@@ -90,64 +93,69 @@ val experienceList = listOf(
         bulletPoints = listOf(
             "App (Glasswing [Old]): Enhanced app performance by 40% through proactive bug and crash resolution.",
             "App: (Glasswing [New]): Created a sleek new application with a contemporary UI from the ground up.",
-            "Productivity: Expanded the user base by 10% and revenue by 30% with a user-centric app, enhancing engagement  and overall experience.",
+            "Productivity: Expanded the user base by 10% and revenue by 30% with a user-centric app, enhancing engagement and overall experience.",
             "Productivity: Cross-team collaboration, leading to a 10% boost in productivity.")
     )
 )
-
-//Ref: https://github.com/Kotlin/kotlinx-datetime?tab=readme-ov-file
-
-fun getTotalExperience(): String {
-
-    val currentTime = Clock.System.now().toLocalDateTime(TimeZone.UTC)
-
-    val currentYear = currentTime.year
-    val currentMonth = currentTime.month
-    val currentDate = currentTime.dayOfMonth
-
-    val start = LocalDate.parse("2019-07-19")
-    val end = LocalDate.parse("${currentYear}-${currentMonth}-${currentDate}")
-
-    val totalMonths = start.monthsUntil(end)
-    val years = totalMonths / 12
-    val months = totalMonths % 12
-
-    return "$years years and $months Months"
-}
-fun getActualExperience(): Double {
-    return 3.0
-}
-fun getFreelanceExperience(): Double {
-    return 1.0
-}
 
 val experienceQuestionsList = listOf(
     QuestionsTemplates(
         id = 0,
         question = "What is your total Experience?",
-        answer = "It has been ${getTotalExperience()} years in IT industry where I am having ${getActualExperience()} year of actual experience ${getFreelanceExperience()} years is freelancing expedience"
+        answer = "It has been ${getTotalExperience()} years in IT industry where I am having ${getActualExperience()} year of actual experience ${getFreelanceExperience()} years is freelancing expedience, apart from this I was use to study and create small project in my collage days and in covid-19 period"
     ),
-
-    //Total: 48m = 4 years
-    // Free: 8 + 8 = 16m = 1 year 4m
-    // 9m + 12m + 9m + 2m =  32m = 2y 8m
 
 
     QuestionsTemplates(
         id = 1,
         question = "Why did you start career with kotlin?",
-        answer = "I have worked on around 20 projects till now, few of them are form existing to make it stable and most of them are from scratch including finance, security, social media, food and drink, health, educational etc domain."
+        answer = "After lots of researched regarding technology to choose,I have found Android domain as a grate start, When I started my career, In 2017 Google has announced Kotlin as supportive language for android, I seen kotlin as future because Kotlin has multiple flavor to worked on like Android, KMM(KMP), Server-Side (Ktor), Data Science, and Java Interoperable, That's Why Kotlin 😍."
     ),
 
     QuestionsTemplates(
         id = 2,
         question = "Why did you join same company again in May 2023?",
-        answer = "I usually preferred to work mostly on kotlin, apart from this I also worked on XML, MYSQL, Firebase, HTML, CSS, JS, Java"
+        answer = "In May 2023 When I left MobiHive Organization, I start looking for Job, applied many organization but no reply or response from HR, at same Time InnovationsHub Services has a project and Manager wants me to work on that project. As I also want a job hence I had started as Freelancing"
     ),
 
     QuestionsTemplates(
         id = 3,
         question = "What is best thing you learn from your career or experience or senior?",
-        answer = "When I started my career, In 2017 Google has announced Kotlin as supportive language for android, I seen kotlin as future because Kotlin has multiple flavor to worked on like Android, KMM(KMP), Server-Side (Ktor), Data Science, and Java Interoperable, That's Why Kotlin 😍"
+        answer = "Not from Senior Yet, but from my career I learn to take responsibilities, against work, should be commited to work it will indirectly helps us in our growth. independence, problem solving strategy, Learning and Officially implemented SDLC Lifecycle in my career."
+    )
+)
+
+val experienceMapList = listOf(
+
+    MapItemData(
+        title = "Mobile Programming India Pvt. Ltd.",
+        address = "8th Floor East-Court, Phoenix Marketcity,, 808, 809, Viman Nagar, Pune, 411014",
+        hours = "9:00 AM - 06:00 PM",
+        websiteUrl = "https://programming.com/",
+        directionUrl = "https://maps.app.goo.gl/4YmW9HkMKdtzuEiz7"
+    ),
+
+    MapItemData(
+        title = "MobiHive Labs Limited, London",
+        address = "61 Clayhall Avenue, Barkingside, London, IG5 0PW",
+        hours = "11:00 AM - 08:30 PM",
+        websiteUrl = "https://mobihivelabs.com/",
+        directionUrl = "https://maps.app.goo.gl/pPbF5BioXwV4qts66"
+    ),
+
+    MapItemData(
+        title = "InnovationsHub Services Pvt Ltd",
+        address = "4/5 Bele Sankul, Ghankar Ln, Raviwar Karanja, Nashik, Maharashtra, India 422 001",
+        hours = "10:00 AM - 07:00 PM",
+        websiteUrl = "https://innovationshub.in/",
+        directionUrl = "https://goo.gl/maps/RLssUPVKZUpabJFV7"
+    ),
+
+    MapItemData(
+        title = "Pinnacle IT Solutions",
+        address = "703, A wing, Mahalaxmi nagar, Urit Nagar, Warje, Pune, Maharashtra 411058",
+        hours = "10:30 AM - 8:00 PM",
+        websiteUrl = "https://www.pinnacleit.in/",
+        directionUrl = "https://maps.app.goo.gl/VjjvPyfhWbdbhXtu5"
     )
 )

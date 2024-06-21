@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
@@ -22,15 +23,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import aoogle.composeapp.generated.resources.Res
 import aoogle.composeapp.generated.resources.avatar
+import data.ExperienceData
 import org.jetbrains.compose.resources.painterResource
 
 
 @Composable
-fun experienceItems(modifier: Modifier = Modifier) {
-    Column (modifier = modifier.padding(vertical = 16.dp)){
+fun experienceItems(experienceData: ExperienceData, modifier: Modifier = Modifier) {
+
+    Column (modifier = modifier.padding(vertical = 16.dp)) {
         Row (verticalAlignment = Alignment.CenterVertically){
             Image(
-                painter = painterResource(Res.drawable.avatar),
+                painter = painterResource(experienceData.image),
                 contentDescription = "Avatar",
                 contentScale = ContentScale.Crop,
                 modifier = modifier
@@ -40,12 +43,12 @@ fun experienceItems(modifier: Modifier = Modifier) {
 
             Column(modifier = modifier.padding(horizontal = 10.dp)) {
                 Text(
-                    text = "Software Developer",
+                    text = experienceData.titlePosition,
                     fontSize = 14.sp,
                     color = Color(0XFFDADCE0)
                 )
                 Text(
-                    text = "https://www.programming.com",
+                    text = experienceData.websiteLink,
                     fontSize = 12.sp,
                     color = Color(0XFFDADCE0)
                 )
@@ -55,7 +58,7 @@ fun experienceItems(modifier: Modifier = Modifier) {
         Row(verticalAlignment = Alignment.CenterVertically) {
 
             Text(
-                text = "Mobile Programming India Pvt. Ltd.",
+                text = experienceData.companyName,
                 color = Color(0XFF99C3FF),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
@@ -74,7 +77,7 @@ fun experienceItems(modifier: Modifier = Modifier) {
         Row (verticalAlignment = Alignment.CenterVertically) {
 
             Text(
-                text = "May 2024 - Present",
+                text = experienceData.duration,
                 color = Color.White,
                 fontSize = 14.sp
             )
@@ -82,7 +85,7 @@ fun experienceItems(modifier: Modifier = Modifier) {
             smallDot()
 
             Text(
-                text = if (true) "Full-Time" else "Part-Time",
+                text = experienceData.workMode,
                 color = Color.White,
                 fontSize = 14.sp
             )
@@ -91,7 +94,7 @@ fun experienceItems(modifier: Modifier = Modifier) {
 
             //Work Location
             Text(
-                text = "Nashik, MH",
+                text = experienceData.workLocation,
                 color = Color.White,
                 fontSize = 14.sp,
                 modifier = modifier.padding(vertical = 6.dp)
@@ -101,27 +104,25 @@ fun experienceItems(modifier: Modifier = Modifier) {
 
             //Work Type
             Text(
-                text = "(Remote), WFH",
+                text = experienceData.workType,
                 color = Color.White,
                 fontSize = 14.sp,
                 modifier = modifier.padding(vertical = 6.dp)
             )
         }
 
-        LazyColumn {
-
-            items(4) {
-
-                Row (verticalAlignment = Alignment.CenterVertically,
+        Column {
+            experienceData.bulletPoints.forEach {
+                Row (verticalAlignment = Alignment.Top,
                     modifier = modifier.padding(vertical = 2.dp)) {
-                    smallDot(modifier = modifier.padding(horizontal = 6.dp))
+                    smallDot(modifier = modifier.padding(top = 6.dp, end = 6.dp))
                     Text(
-                        text = "To gather requirement from client to deployment to play store",
+                        text = it,
                         color = Color(0XFFBDC1C6)
                     )
                 }
             }
-
         }
+        // LazyColumn (userScrollEnabled = false) { items(experienceData.bulletPoints) {} }
     }
 }

@@ -8,6 +8,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -147,9 +149,9 @@ fun latestCommon(
                 modifier = modifier.padding(vertical = 4.dp)
             )
             Icon(
-                Icons.Default.CheckCircle,
+                if (!pageAllItemData.isUrlSafe) Icons.Default.Info else Icons.Default.CheckCircle,
                 contentDescription = "Verified",
-                tint = Color(0XFF3DA288),
+                tint = if (!pageAllItemData.isUrlSafe) Color.Red else Color(0XFF3DA288),
                 modifier = modifier
                     .padding(horizontal = 4.dp)
                     .size(16.dp)
@@ -188,7 +190,6 @@ fun latestCommon(
             )
         }
     }
-
 }
 
 

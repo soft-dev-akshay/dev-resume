@@ -142,9 +142,15 @@ fun searchPage(modifier: Modifier = Modifier) {
                 1 -> {
                     experience(modifier)
                 }
-                2 -> {}
-                3 -> {}
-                4 -> {}
+                2 -> {
+                    project(modifier)
+                }
+                3 -> {
+                    education(modifier)
+                }
+                4 -> {
+                    images(modifier)
+                }
                 else -> {
                     all(modifier)
                 }

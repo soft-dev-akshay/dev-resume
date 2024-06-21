@@ -20,7 +20,7 @@ import data.*
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun experience(modifier: Modifier = Modifier) {
+fun education(modifier: Modifier) {
 
     val questionsList = remember { pageAllQuestionsList.toMutableStateList() }
     var currentId by remember { mutableIntStateOf(-1) }
@@ -32,8 +32,8 @@ fun experience(modifier: Modifier = Modifier) {
             //============================LATEST COMPANY, PROJECT, EDUCATION=================================
             LazyColumn(modifier = modifier.padding(top = 10.dp)) {
 
-                items(experienceList) {
-                    experienceItems(it,modifier)
+                items(educationData) {
+                    latestCommon(it,modifier)
                 }
 
                 item {
@@ -47,7 +47,7 @@ fun experience(modifier: Modifier = Modifier) {
                     horizontalLine(modifier.padding(top = 6.dp))
                 }
 
-                items(experienceQuestionsList) { questions ->
+                items(educationQuestion) { questions ->
 
                     questionsItem(
                         question = questions,
@@ -58,9 +58,10 @@ fun experience(modifier: Modifier = Modifier) {
                     )
                 }
 
+
                 item {
                     Text(
-                        text = "Office Places",
+                        text = "Places",
                         color = Color(0XFFE8E8E8),
                         fontSize = 20.sp,
                         modifier = modifier.padding(top = 26.dp)
@@ -79,14 +80,18 @@ fun experience(modifier: Modifier = Modifier) {
                     )
                 }
 
-                items(experienceMapList) {
+                items(educationLocation) {
                     locationItems(menuItem = it, modifier = modifier)
                 }
 
                 item {
-                    Spacer(modifier = modifier.padding(vertical = 100.dp))
+                    Spacer(modifier = modifier.padding(top = 10.dp))
                 }
 
+
+                item {
+                    Spacer(modifier = modifier.padding(vertical = 100.dp))
+                }
             }
         }
 
