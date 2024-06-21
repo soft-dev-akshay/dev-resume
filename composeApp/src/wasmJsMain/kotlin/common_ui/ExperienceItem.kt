@@ -25,18 +25,6 @@ import aoogle.composeapp.generated.resources.avatar
 import org.jetbrains.compose.resources.painterResource
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 @Composable
 fun experienceItems(modifier: Modifier = Modifier) {
     Column (modifier = modifier.padding(vertical = 16.dp)){

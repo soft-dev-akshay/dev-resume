@@ -1,10 +1,11 @@
 package data
 
 import aoogle.composeapp.generated.resources.Res
-import aoogle.composeapp.generated.resources.avatar
 import aoogle.composeapp.generated.resources.img_mobile_llc
+import kotlinx.browser.window
+import kotlinx.datetime.*
 import org.jetbrains.compose.resources.DrawableResource
-
+import kotlin.time.*
 
 data class ExperienceData (
     val id: Int,
@@ -37,7 +38,7 @@ val experienceList = listOf(
 
     ExperienceData(
         id = 2,
-        image = Res.drawable.img_innovations,
+        image = Res.drawable.img_mobile_llc,
         titlePosition = "Sr. Android Developer",
         websiteLink = "https://mobihivelabs.com/",
         companyName = "MobiHive Labs Limited London",
@@ -94,29 +95,59 @@ val experienceList = listOf(
     )
 )
 
+//Ref: https://github.com/Kotlin/kotlinx-datetime?tab=readme-ov-file
+
+fun getTotalExperience(): String {
+
+    val currentTime = Clock.System.now().toLocalDateTime(TimeZone.UTC)
+
+    val currentYear = currentTime.year
+    val currentMonth = currentTime.month
+    val currentDate = currentTime.dayOfMonth
+
+    val start = LocalDate.parse("2019-07-19")
+    val end = LocalDate.parse("${currentYear}-${currentMonth}-${currentDate}")
+
+    val totalMonths = start.monthsUntil(end)
+    val years = totalMonths / 12
+    val months = totalMonths % 12
+
+    return "$years years and $months Months"
+}
+fun getActualExperience(): Double {
+    return 3.0
+}
+fun getFreelanceExperience(): Double {
+    return 1.0
+}
 
 val experienceQuestionsList = listOf(
     QuestionsTemplates(
         id = 0,
-        question = "can you tell me something about yourself?",
-        answer = "Myself Akshay Pawar having 3+ years of experience to worked on Native Android with Kotlin, I have worked on 15+ apps among them few are existing and most of then are from scratch and hosted 10+ apps on Play store including self crafted app",
+        question = "What is your total Experience?",
+        answer = "It has been ${getTotalExperience()} years in IT industry where I am having ${getActualExperience()} year of actual experience ${getFreelanceExperience()} years is freelancing expedience"
     ),
+
+    //Total: 48m = 4 years
+    // Free: 8 + 8 = 16m = 1 year 4m
+    // 9m + 12m + 9m + 2m =  32m = 2y 8m
+
 
     QuestionsTemplates(
         id = 1,
-        question = "How many project you have done?",
+        question = "Why did you start career with kotlin?",
         answer = "I have worked on around 20 projects till now, few of them are form existing to make it stable and most of them are from scratch including finance, security, social media, food and drink, health, educational etc domain."
     ),
 
     QuestionsTemplates(
         id = 2,
-        question = "What is your tech-stack?",
+        question = "Why did you join same company again in May 2023?",
         answer = "I usually preferred to work mostly on kotlin, apart from this I also worked on XML, MYSQL, Firebase, HTML, CSS, JS, Java"
     ),
 
     QuestionsTemplates(
         id = 3,
-        question = "Why Kotlin?",
+        question = "What is best thing you learn from your career or experience or senior?",
         answer = "When I started my career, In 2017 Google has announced Kotlin as supportive language for android, I seen kotlin as future because Kotlin has multiple flavor to worked on like Android, KMM(KMP), Server-Side (Ktor), Data Science, and Java Interoperable, That's Why Kotlin 😍"
     )
 )
