@@ -30,6 +30,7 @@ import aoogle.composeapp.generated.resources.ic_globe_asia
 import data.SocialData
 import data.socials
 import org.jetbrains.compose.resources.painterResource
+import utils.getAge
 
 
 @Composable
@@ -129,8 +130,7 @@ fun sideInfo(modifier: Modifier = Modifier) {
                     "\nand I am excited to be pursuing my goal of becoming a Professional Android " +
                     "\ndeveloper at the Parent company. I am confident that the Skills and experience I have" +
                     "\ngained in my current role will prepare me well for the next stage of my career.",
-            color = Color(0XFFBDC1C6)
-        )
+            color = Color(0XFFBDC1C6))
 
         Spacer(modifier = modifier.padding(6.dp))
 
@@ -144,7 +144,7 @@ fun sideInfo(modifier: Modifier = Modifier) {
                 append("Born: ")
             }
             withStyle(style = SpanStyle(color = Color.White)) {
-                append("10 July 1996 (age 28 years), ")
+                append("10 July 1996 (age ${getAge()} years), ")
             }
 
             withStyle(style = SpanStyle(color = Color(0XFF99C3FF))) {
@@ -237,7 +237,7 @@ fun sideInfo(modifier: Modifier = Modifier) {
             }
 
             withStyle(style = SpanStyle(color = Color(0XFF99C3FF))) {
-                append("Glasswing Partner, Sky Recharge, ERxPharma, M3 Comopse, ")
+                append("Glasswing Partner, Sky Recharge, ERxPharma, M3 Compose, ")
             }
 
             withStyle(style = SpanStyle(color = Color.White)) {

@@ -22,7 +22,6 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun education(modifier: Modifier) {
 
-    val questionsList = remember { pageAllQuestionsList.toMutableStateList() }
     var currentId by remember { mutableIntStateOf(-1) }
 
     Row (modifier = modifier.fillMaxWidth()) {

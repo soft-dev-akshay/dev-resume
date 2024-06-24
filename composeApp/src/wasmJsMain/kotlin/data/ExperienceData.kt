@@ -1,14 +1,15 @@
 package data
 
+import aoogle.composeapp.generated.resources.*
 import aoogle.composeapp.generated.resources.Res
-import aoogle.composeapp.generated.resources.img_mobile_llc
+import aoogle.composeapp.generated.resources.logo_mobihive_sq
+import aoogle.composeapp.generated.resources.logo_mobile_llc
+import aoogle.composeapp.generated.resources.logo_pinnale
 import common_ui.MapItemData
-import kotlinx.datetime.*
 import org.jetbrains.compose.resources.DrawableResource
 import utils.getActualExperience
 import utils.getFreelanceExperience
 import utils.getTotalExperience
-import kotlin.time.*
 
 data class ExperienceData (
     val id: Int,
@@ -23,13 +24,14 @@ data class ExperienceData (
     val bulletPoints: List<String>
 )
 
-val experienceList = listOf(
+val experienceList = listOf (
+
     ExperienceData(
         id = 1,
-        image = Res.drawable.img_mobile_llc,
-        titlePosition = "Software Developer",
-        websiteLink = "https://www.programming.com/",
-        companyName = "Mobile Programming India Pvt. Ltd.",
+        image = Res.drawable.logo_mobile_llc,
+        titlePosition = Details.ROLE.SOFT_DEV,
+        websiteLink = Details.LINKS.URL_COMP_4,
+        companyName = Details.COMPANY.PROGRAMMING,
         duration = "May 2024 - Present",
         workMode = "Full-Time",
         workLocation = "Pune, MH",
@@ -41,10 +43,10 @@ val experienceList = listOf(
 
     ExperienceData(
         id = 2,
-        image = Res.drawable.img_mobile_llc,
-        titlePosition = "Sr. Android Developer",
-        websiteLink = "https://mobihivelabs.com/",
-        companyName = "MobiHive Labs Limited London",
+        image = Res.drawable.logo_mobihive_sq,
+        titlePosition = Details.ROLE.SR_POS,
+        websiteLink = Details.LINKS.URL_COMP_3,
+        companyName = Details.COMPANY.MOBIHIVE,
         duration = "Sept 2022 - April 2023",
         workMode = "Full Time",
         workLocation = "Sinnar, MH",
@@ -62,10 +64,10 @@ val experienceList = listOf(
 
     ExperienceData(
         id = 3,
-        image = Res.drawable.img_mobile_llc,
-        titlePosition = "Sr. Android Developer",
-        websiteLink = "https://innovationshub.in/",
-        companyName = "InnovationsHub Services Pvt. Ltd.",
+        image = Res.drawable.logo_innovations,
+        titlePosition = Details.ROLE.SR_POS,
+        websiteLink = Details.LINKS.URL_COMP_2,
+        companyName = Details.COMPANY.INNOVATIONS,
         duration = "Oct 2021 - Sept 2022",
         workMode = "Full Time",
         workLocation = "Nashik, MH",
@@ -82,10 +84,10 @@ val experienceList = listOf(
 
     ExperienceData(
         id = 3,
-        image = Res.drawable.img_mobile_llc,
-        titlePosition = "Software Developer",
-        websiteLink = "https://www.pinnacleit.in/",
-        companyName = "Pinnacle IT Solution",
+        image = Res.drawable.logo_pinnale,
+        titlePosition = Details.ROLE.SOFT_DEV,
+        websiteLink = Details.LINKS.URL_COMP_1,
+        companyName = Details.COMPANY.PINNACLE,
         duration = "Oct 2021 - Sept 2022",
         workMode = "Full Time",
         workLocation = "Sinnar, MH",

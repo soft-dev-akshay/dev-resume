@@ -136,7 +136,7 @@ fun searchPage(modifier: Modifier = Modifier) {
 
         horizontalLine()
 
-        Row (modifier = modifier.padding(start = 200.dp)) {
+        Row (modifier = modifier.padding(start = if (currentId != 4) 200.dp else 0.dp)) {
 
             when(currentId) {
                 1 -> {

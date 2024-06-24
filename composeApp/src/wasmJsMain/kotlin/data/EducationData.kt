@@ -1,12 +1,14 @@
 package data
 
 import aoogle.composeapp.generated.resources.Res
-import aoogle.composeapp.generated.resources.img_m3_compose
+import aoogle.composeapp.generated.resources.logo_gmd
+import aoogle.composeapp.generated.resources.logo_m3_compose
+import aoogle.composeapp.generated.resources.logo_svit
 import common_ui.MapItemData
 
 val educationData  = listOf(
 
-    PageAllItemData(image = Res.drawable.img_m3_compose,
+    PageAllItemData(image = Res.drawable.logo_svit,
         heading = "Bachelor Degree (IT)",
         url = "https://svitnashik.in/",
         title = "SVIT Nashik",
@@ -17,7 +19,7 @@ val educationData  = listOf(
         isFullTime = false
     ),
 
-    PageAllItemData(image = Res.drawable.img_m3_compose,
+    PageAllItemData(image = Res.drawable.logo_gmd,
         heading = "Higher Secondary (HSC)",
         url = "https://www.gmdcollege.in/",
         title = "GMD Collage Sinnar",
@@ -29,7 +31,7 @@ val educationData  = listOf(
         isUrlSafe = false
     ),
 
-    PageAllItemData(image = Res.drawable.img_m3_compose,
+    PageAllItemData(image = Res.drawable.logo_gmd,
         heading = "Secondary School (SSC)",
         url = "https://tinyurl.com/lsb-waje-vidyalay",
         title = "L.S.B. Waje Vidyalay Sinnar",
@@ -40,7 +42,7 @@ val educationData  = listOf(
         isFullTime = false,
     ),
 
-    PageAllItemData(image = Res.drawable.img_m3_compose,
+    PageAllItemData(image = Res.drawable.logo_gmd,
         heading = "Primary School",
         url = "https://mvp.edu.in/mvpsite/primary-schools/7",
         title = "Abhinav Bal Vikas Mandir, Sinnar",
@@ -62,14 +64,14 @@ val educationQuestion = listOf (
         ),
 
     QuestionsTemplates(
-        id = 1,
-        question = "What kind of study you did at svit and gmd",
+        id = 2,
+        question = "What kind of study you did at SVIT and GMD",
         answer = "I took Science in GMD Collage, and IT in SVIT to learn More about technology problem solving tactics.",
         isOpen = false
     ),
 
     QuestionsTemplates(
-        id = 1,
+        id = 3,
         question = "Why Red warning at GMD Link?",
         answer = "When I visit that site, My antivirus software blocking me visiting site, same thing should not done with visitors hence I shows red icon",
         isOpen = false

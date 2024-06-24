@@ -2,8 +2,6 @@ package data
 
 import aoogle.composeapp.generated.resources.*
 import aoogle.composeapp.generated.resources.Res
-import aoogle.composeapp.generated.resources.img_m3_compose
-import aoogle.composeapp.generated.resources.img_mobile_llc
 import org.jetbrains.compose.resources.DrawableResource
 
 data class PageAllItemData(
@@ -21,7 +19,7 @@ data class PageAllItemData(
 
 val pageAllMainData = listOf(
     PageAllItemData(
-        image = Res.drawable.img_mobile_llc,
+        image = Res.drawable.logo_mobile_llc,
         heading = "Mobile LLC",
         url = "https://www.programming.com/",
         title = "Mobile Programming India Pvt. Ltd.",
@@ -32,7 +30,7 @@ val pageAllMainData = listOf(
     ),
 
     PageAllItemData(
-        image = Res.drawable.img_m3_compose,
+        image = Res.drawable.logo_m3_compose,
         heading = "Android App",
         url = "https://play.google.com/store/apps/details?id=com.codexdroid.m3compose",
         title = "M3 Compose",
@@ -43,7 +41,7 @@ val pageAllMainData = listOf(
     ),
 
     PageAllItemData(
-        image = Res.drawable.img_svit,
+        image = Res.drawable.logo_svit,
         heading = "Bachelor Degree",
         url = "https://svitnashik.in/",
         title = "SVIT Nashik",

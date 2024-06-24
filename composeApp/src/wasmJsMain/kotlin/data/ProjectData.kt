@@ -1,14 +1,16 @@
 package data
 
+import aoogle.composeapp.generated.resources.*
 import aoogle.composeapp.generated.resources.Res
-import aoogle.composeapp.generated.resources.img_m3_compose
-import aoogle.composeapp.generated.resources.img_mobile_llc
+import aoogle.composeapp.generated.resources.logo_erxpharma
+import aoogle.composeapp.generated.resources.logo_m3_compose
+import aoogle.composeapp.generated.resources.logo_the_guru
 
 
 val projectsListPre = listOf(
 
     PageAllItemData(
-        image = Res.drawable.img_m3_compose,
+        image = Res.drawable.logo_m3_compose,
         heading = "Own Crafted Android App",
         url = "https://play.google.com/store/apps/details?id=com.codexdroid.m3compose",
         title = "M3 Compose",
@@ -19,7 +21,7 @@ val projectsListPre = listOf(
     ),
 
     PageAllItemData(
-        image = Res.drawable.img_m3_compose,
+        image = Res.drawable.logo_the_guru,
         heading = "Own Crafted Android App",
         url = "https://play.google.com/store/apps/details?id=com.codexdroid.theguru",
         title = "The Guru",
@@ -30,7 +32,7 @@ val projectsListPre = listOf(
     ),
 
     PageAllItemData (
-        image = Res.drawable.img_m3_compose,
+        image = Res.drawable.logo_erxpharma,
         heading = "Organizational Android App from scratch",
         url = "https://play.google.com/store/apps/details?id=com.svsion.erxpharma",
         title = "ERxPharmaPro",
@@ -41,7 +43,7 @@ val projectsListPre = listOf(
     ),
 
     PageAllItemData(
-        image = Res.drawable.img_m3_compose,
+        image = Res.drawable.logo_credithive,
         heading = "Organizational Android App from scratch",
         url = "https://play.google.com/store/apps/",
         title = "CreditHive POS",
@@ -52,7 +54,7 @@ val projectsListPre = listOf(
     ),
 
     PageAllItemData(
-        image = Res.drawable.img_m3_compose,
+        image = Res.drawable.ic_globe_asia,
         heading = "Organizational Android App from scratch",
         url = "https://play.google.com/store/apps/",
         title = "Parrot4Business",
@@ -97,7 +99,7 @@ val projectsQuestions = listOf (
 val projectsListPost = listOf(
 
     PageAllItemData(
-        image = Res.drawable.img_m3_compose,
+        image = Res.drawable.logo_sky_recharge,
         heading = "Organizational Android App from scratch",
         url = "https://play.google.com/store/apps/details?id=com.skyonlinerechargeservices/",
         title = "Sky Recharge App",
@@ -108,7 +110,7 @@ val projectsListPost = listOf(
     ),
 
     PageAllItemData(
-        image = Res.drawable.img_m3_compose,
+        image = Res.drawable.logo_grampanchayat,
         heading = "Organizational Android App from scratch",
         url = "https://play.google.com/store/apps/",
         title = "Grampanchayat",
@@ -120,7 +122,7 @@ val projectsListPost = listOf(
 
 
     PageAllItemData(
-        image = Res.drawable.img_m3_compose,
+        image = Res.drawable.logo_boss,
         heading = "Organizational Android App from scratch",
         url = "https://play.google.com/store/apps/",
         title = "Boss Sab Dekhta Hai",
@@ -131,7 +133,7 @@ val projectsListPost = listOf(
     ),
 
     PageAllItemData(
-        image = Res.drawable.img_m3_compose,
+        image = Res.drawable.logo_glasswing,
         heading = "Organizational Android App from scratch and existing",
         url = "https://play.google.com/store/apps/",
         title = "Glasswing Partner",
@@ -142,7 +144,7 @@ val projectsListPost = listOf(
     ),
 
     PageAllItemData(
-        image = Res.drawable.img_m3_compose,
+        image = Res.drawable.logo_kichenbaba,
         heading = "Existing App, Java + Kotlin",
         url = "https://play.google.com/store/apps/",
         title = "Kichenbaba",

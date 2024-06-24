@@ -28,12 +28,14 @@ import data.PageAllItemData
 import data.pageAllMainData
 import data.pageAllQuestionsList
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.skia.skottie.Logger
+import org.jetbrains.skiko.DefaultConsoleLogger
 
 
 @Composable
 fun all(modifier: Modifier = Modifier) {
 
-    val questionsList = remember { pageAllQuestionsList.toMutableStateList() }
+
     var currentId by remember { mutableIntStateOf(-1) }
 
     Row (modifier = modifier.fillMaxWidth()) {
@@ -58,7 +60,7 @@ fun all(modifier: Modifier = Modifier) {
                     horizontalLine(modifier.padding(top = 6.dp))
                 }
 
-                items(questionsList) { questions ->
+                items(pageAllQuestionsList) { questions ->
 
                     questionsItem(
                         question = questions,

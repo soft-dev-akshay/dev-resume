@@ -15,7 +15,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import data.QuestionsTemplates
-import utils.showSnack
 
 
 @Composable
@@ -43,7 +42,7 @@ fun questionsItem (
             )
 
             IconButton(
-                onClick = { onClickOpen(0) },
+                onClick = { onClickOpen(question.id) },
                 modifier = modifier
                     .background(
                         color = Color(0XFF313335),
@@ -61,7 +60,7 @@ fun questionsItem (
             }
         }
 
-        if (question.isOpen || currentId == 1) {
+        if (currentId == question.id) {
             Text(
                 text = question.answer,
                 color = Color.White,

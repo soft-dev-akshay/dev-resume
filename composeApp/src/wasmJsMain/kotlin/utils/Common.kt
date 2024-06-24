@@ -29,3 +29,7 @@ fun getActualExperience(): Double {
 fun getFreelanceExperience(): Double {
     return 0.8
 }
+
+fun getAge(): Int {
+    return Clock.System.now().toLocalDateTime(TimeZone.UTC).year - 1996
+}
