@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -12,6 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import data.QuestionsTemplates
@@ -46,13 +49,16 @@ fun questionsItem (
                 modifier = modifier
                     .background(
                         color = Color(0XFF313335),
-                        shape = CircleShape
-                    )
+                        shape = CircleShape)
                     .padding(2.dp)
                     .size(24.dp)
+                    .pointerHoverIcon(icon = PointerIcon.Hand)
             ) {
+
                 Icon(
-                    imageVector = Icons.Default.KeyboardArrowDown,
+                    imageVector = if(currentId == question.id)
+                        Icons.Default.KeyboardArrowUp
+                    else Icons.Default.KeyboardArrowDown,
                     contentDescription = "Open",
                     modifier = modifier,
                     tint = Color.White
@@ -63,7 +69,7 @@ fun questionsItem (
         if (currentId == question.id) {
             Text(
                 text = question.answer,
-                color = Color.White,
+                color = Color(0XFFBDC1C6),
                 fontSize = 12.sp
             )
         }

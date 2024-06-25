@@ -3,11 +3,12 @@ package utils
 import kotlinx.datetime.*
 
 
-//Total: 48m = 4 years
-// Free: 8 + 8 = 16m = 1 year 4m
-// 9m + 12m + 9m + 2m =  32m = 2y 8m
-
 //Ref: https://github.com/Kotlin/kotlinx-datetime?tab=readme-ov-file
+
+enum class PAGE {
+    HOME, SEARCH
+}
+
 
 private fun getTotalMonths(): Int {
     val currentTime = Clock.System.now().toLocalDateTime(TimeZone.UTC)

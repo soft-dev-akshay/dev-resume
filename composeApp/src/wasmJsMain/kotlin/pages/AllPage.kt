@@ -1,6 +1,9 @@
 package pages
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.hoverable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -9,7 +12,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -17,7 +19,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -28,8 +33,6 @@ import data.PageAllItemData
 import data.pageAllMainData
 import data.pageAllQuestionsList
 import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.skia.skottie.Logger
-import org.jetbrains.skiko.DefaultConsoleLogger
 
 
 @Composable
@@ -80,6 +83,7 @@ fun all(modifier: Modifier = Modifier) {
                     )
                 }
 
+
                 item {
                     Image(painter = painterResource(Res.drawable.map_image),
                         contentDescription = "",
@@ -97,9 +101,8 @@ fun all(modifier: Modifier = Modifier) {
                 }
 
                 item {
-                    Spacer(modifier = modifier.padding(vertical = 100.dp))
+                    Spacer(modifier = modifier.padding(vertical = 20.dp))
                 }
-
             }
         }
 
@@ -116,6 +119,9 @@ fun latestCommon(
     pageAllItemData: PageAllItemData,
     modifier: Modifier = Modifier) {
 
+
+    val localUri = LocalUriHandler.current
+
     Column (modifier = modifier.padding(vertical = 16.dp)){
         Row (verticalAlignment = Alignment.CenterVertically){
             Image(
@@ -128,15 +134,20 @@ fun latestCommon(
             )
 
             Column(modifier = modifier.padding(horizontal = 10.dp)) {
-                Text(
+
+                Text (
                     text = pageAllItemData.heading,
                     fontSize = 14.sp,
                     color = Color(0XFFDADCE0)
                 )
-                Text(
+                Text (
                     text = pageAllItemData.url,
                     fontSize = 12.sp,
-                    color = Color(0XFFDADCE0)
+                    color = Color(0XFFDADCE0),
+                    modifier = modifier
+                        .clickable {
+                            localUri.openUri(pageAllItemData.url)
+                        }.pointerHoverIcon(icon = PointerIcon.Hand)
                 )
             }
         }
@@ -148,7 +159,11 @@ fun latestCommon(
                 color = Color(0XFF99C3FF),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                modifier = modifier.padding(vertical = 4.dp)
+                modifier = modifier
+                    .padding(vertical = 4.dp)
+                    .clickable {
+                        localUri.openUri(pageAllItemData.url)
+                    }.pointerHoverIcon(icon = PointerIcon.Hand)
             )
             Icon(
                 if (!pageAllItemData.isUrlSafe) Icons.Default.Info else Icons.Default.CheckCircle,

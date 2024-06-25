@@ -25,7 +25,7 @@ val commonMapItemsList = listOf(
     MapItemData(
         title = "Office",
         address = "8th Floor East-Court, Phoenix Market city,, 808, 809, Viman Nagar, Pune, 411014",
-        hours = "Open: 7 AM - 7 PM",
+        hours = "Opens: 7 AM - 7 PM",
         rating = 4,
         type = "Corporate office in Pune, Maharashtra",
         websiteUrl = "https://programming.com/",
@@ -34,13 +34,13 @@ val commonMapItemsList = listOf(
     MapItemData(
         title = "Home",
         address = "Shivaji Nagar Sinnar, 422103",
-        hours = "6:00PM - 10PM",
+        hours = "Opens: 6:00PM - 10PM",
         rating = 0,
     ),
     MapItemData(
         title = "Engineering Collage",
         address = "Nashik - Shirdi Rd, Svit, Maharashtra 422102",
-        hours = "9 AM - 5 PM",
+        hours = "Opens: 9 AM - 5 PM",
         rating = 4,
         type = "Engineering Collage, Nashik",
         websiteUrl = "https://svitnashik.in/",

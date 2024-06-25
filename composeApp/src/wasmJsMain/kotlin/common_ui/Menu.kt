@@ -1,6 +1,8 @@
 package common_ui
 
 import androidx.compose.foundation.*
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsHoveredAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
@@ -16,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import aoogle.composeapp.generated.resources.Res
 import aoogle.composeapp.generated.resources.avatar
 import org.jetbrains.compose.resources.painterResource
+import pages.homePage
 
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
@@ -24,8 +27,10 @@ fun topMenu(
     onClickedGmail: () -> Unit,
     onClickedImages: () -> Unit,
     onClickedAppIcon: () -> Unit,
-    onClickedProfile: () -> Unit,
-    modifier: Modifier = Modifier) {
+    onHoverProfile: (Boolean) -> Unit,
+    modifier: Modifier = Modifier,
+    interactionSrc: MutableInteractionSource = remember { MutableInteractionSource() }
+    ) {
 
     Row (verticalAlignment = Alignment.CenterVertically, modifier = modifier.padding(end = 10.dp)){
         Text(
@@ -58,7 +63,10 @@ fun topMenu(
                 .clip(CircleShape)
                 .size(30.dp)
                 .align(alignment = Alignment.CenterVertically)
-                .onClick { onClickedProfile() }
+                .hoverable(interactionSrc,enabled = true)
         )
+
+        onHoverProfile(interactionSrc.collectIsHoveredAsState().value)
+
     }
 }

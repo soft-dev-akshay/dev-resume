@@ -20,8 +20,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.dp
@@ -32,7 +35,9 @@ import data.SearchMenu
 import data.searchMenu
 
 @Composable
-fun searchPage(modifier: Modifier = Modifier) {
+fun searchPage(
+    onNavigate: () -> Unit,
+    modifier: Modifier = Modifier) {
 
     var inputSearch by remember { mutableStateOf("Akshay Pawar") }
     var currentId by remember { mutableIntStateOf(0) }
@@ -51,7 +56,12 @@ fun searchPage(modifier: Modifier = Modifier) {
                 fontSize = 30.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.White,
-                modifier = modifier.padding(start = 40.dp)
+                modifier = modifier
+                    .padding(start = 40.dp)
+                    .pointerHoverIcon(icon = PointerIcon.Hand)
+                    .clickable {
+                        onNavigate()
+                    }
             )
 
             Row(modifier = modifier
@@ -108,7 +118,10 @@ fun searchPage(modifier: Modifier = Modifier) {
                     modifier = Modifier
                         .padding(start = 6.dp, end = 16.dp)
                         .size(24.dp)
-                        .clickable {}
+                        .clickable {
+                            inputSearch = inputSearch
+                            currentId = 0
+                        }
                 )
             }
 
@@ -118,7 +131,7 @@ fun searchPage(modifier: Modifier = Modifier) {
                 onClickedGmail = {},
                 onClickedImages = {},
                 onClickedAppIcon = {},
-                onClickedProfile = {})
+                onHoverProfile = {})
         }
 
         Spacer(modifier = modifier.padding(vertical = 10.dp))
@@ -135,27 +148,51 @@ fun searchPage(modifier: Modifier = Modifier) {
         }
 
         horizontalLine()
+        Column(modifier = modifier.padding(start = if (currentId != 4) 200.dp else 0.dp)) {
 
-        Row (modifier = modifier.padding(start = if (currentId != 4) 200.dp else 0.dp)) {
+            if (inputSearch.lowercase() != "akshay pawar") {
+                Row(modifier = modifier.padding(top = 20.dp)) {
 
-            when(currentId) {
-                1 -> {
-                    experience(modifier)
+                    Text(
+                        text = "Did you mean: ",
+                        color = Color(0xFFFF7769),
+
+                        )
+                    Text(
+                        text = "Akshay Pawar",
+                        color = Color(0XFF99C3FF),
+                        fontStyle = FontStyle.Italic,
+                        modifier = modifier
+                            .pointerHoverIcon(icon = PointerIcon.Hand)
+                            .clickable {
+                                inputSearch = "Akshay Pawar"
+                            }
+                    )
                 }
-                2 -> {
-                    project(modifier)
-                }
-                3 -> {
-                    education(modifier)
-                }
-                4 -> {
-                    images(modifier)
-                }
-                else -> {
-                    all(modifier)
+            }
+
+            Row {
+
+                when(currentId) {
+                    1 -> {
+                        experience(modifier)
+                    }
+                    2 -> {
+                        project(modifier)
+                    }
+                    3 -> {
+                        education(modifier)
+                    }
+                    4 -> {
+                        images(modifier)
+                    }
+                    else -> {
+                        all(modifier)
+                    }
                 }
             }
         }
+
     }
 }
 
@@ -173,7 +210,7 @@ fun menuItem (
         textMeasurer.measure(menu.text).size.width.toDp()
     }
 
-    Column {
+    Column (modifier = modifier .pointerHoverIcon(icon = PointerIcon.Hand)){
 
         Text(
             menu.text,

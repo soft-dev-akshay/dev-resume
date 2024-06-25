@@ -1,4 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
@@ -41,10 +40,6 @@ kotlin {
             implementation(compose.animation)
             implementation(compose.animationGraphics)
             implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.0")
-
-
-
-
         }
     }
 }

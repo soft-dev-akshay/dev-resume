@@ -2,6 +2,7 @@ package pages
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -13,6 +14,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -25,7 +28,10 @@ import common_ui.topMenu
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun homePage(modifier: Modifier = Modifier) {
+fun homePage(
+    onNavigate: () -> Unit,
+    onViewResume: () -> Unit,
+    modifier: Modifier = Modifier) {
 
     var gmail by remember { mutableStateOf(false) }
     var images by remember { mutableStateOf(false) }
@@ -33,7 +39,6 @@ fun homePage(modifier: Modifier = Modifier) {
     var profile by remember { mutableStateOf(false) }
 
     var inputSearch by remember { mutableStateOf("") }
-    var searchButtonSnack by remember { mutableStateOf(false) }
     var viewResumeSnack by remember { mutableStateOf(false) }
 
     val snackbarHostState = remember { SnackbarHostState() }
@@ -49,14 +54,33 @@ fun homePage(modifier: Modifier = Modifier) {
             .background(color = Color(0XFF202124))) {
 
             Box(modifier= modifier.align(alignment = Alignment.End)) {
-                topMenu(
-                    onClickedGmail = { gmail = true },
-                    onClickedImages = { images = true },
-                    onClickedAppIcon = { appIcon = true },
-                    onClickedProfile = { profile = true },
-                    modifier = modifier
-                )
+                Column {
+                    topMenu(
+                        onClickedGmail = { },
+                        onClickedImages = { images = true },
+                        onClickedAppIcon = { appIcon = true },
+                        onHoverProfile = { showTooltip -> profile = showTooltip },
+                        modifier = modifier
+                    )
+
+                    if (profile) {
+                        Column (modifier = modifier.padding(end = 10.dp)) {
+                            Column(
+                                modifier = modifier
+                                    .background(color = Color.White, shape = RoundedCornerShape(6.dp))
+                                    .padding(horizontal = 6.dp, vertical = 4.dp)
+                            ){
+                                Text(text = "Google Account")
+                                Text(text = "Akshay Pawar")
+                                Text(text = "pawarakshay13@gmail.com")
+                            }
+                        }
+                    }
+                }
             }
+
+
+
 
             Text (
                 text = "Google",
@@ -98,13 +122,13 @@ fun homePage(modifier: Modifier = Modifier) {
                 },
                 keyboardActions = KeyboardActions(
                     onDone = {
-
+                        onNavigate()
                     }
                 ),
                 singleLine = true,
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = Color(0XFFDFE1E5)
-                )
+                ),
             )
 
             Row (modifier = modifier
@@ -112,19 +136,25 @@ fun homePage(modifier: Modifier = Modifier) {
                 .padding(top = 20.dp)
             ) {
                 OutlinedButton(
-                    onClick = { searchButtonSnack = true },
+                    onClick = { onNavigate() },
                     shape = RoundedCornerShape(6.dp),
-                    border = BorderStroke(1.dp, color = Color(0XFFDFE1E5)),
-                    modifier = modifier.padding(end = 6.dp)
+                    border = BorderStroke(width = 1.dp,
+                        color = Color(0XFFDFE1E5)
+                        ),
+                    modifier = modifier
+                        .padding(end = 6.dp)
+                        .pointerHoverIcon(icon = PointerIcon.Hand),
+                    enabled = inputSearch.isNotEmpty()
                 ) {
                     Text(text = "Search Me", color = Color(0XFFDFE1E5))
                 }
 
                 OutlinedButton(
-                    onClick = { viewResumeSnack = true },
+                    onClick = { onViewResume() },
                     shape = RoundedCornerShape(6.dp),
                     border = BorderStroke(1.dp, color = Color.White),
                     modifier = modifier.padding(start = 8.dp)
+                        .pointerHoverIcon(icon = PointerIcon.Hand)
                 ) {
                     Text(text = "View Resume", color = Color.White)
                 }
@@ -195,11 +225,6 @@ fun homePage(modifier: Modifier = Modifier) {
                     textAlign = TextAlign.End
                 )
             }
-
-//            if (searchButtonSnack) showSnack(message = "Search Button Clicked", onDismissed = { searchButtonSnack = false })
-//            if (viewResumeSnack) showSnack("View Resume Clicked", onDismissed = { viewResumeSnack = false })
-
-
         }
     }
 }
