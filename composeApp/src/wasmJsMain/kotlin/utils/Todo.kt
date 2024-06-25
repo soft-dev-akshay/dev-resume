@@ -20,5 +20,9 @@ project apk links
 
 
 segregate company names and profiles in diff class
+
+* MAP
+* https://github.com/osmdroid/osmdroid
+* https://medium.com/@mr.appbuilder/how-to-integrate-and-work-with-open-street-map-osm-in-an-android-app-kotlin-564b38590bfe
 *
-* */
+*/
