@@ -84,7 +84,7 @@ fun experience(modifier: Modifier = Modifier) {
                 }
 
                 item {
-                    Spacer(modifier = modifier.padding(vertical = 100.dp))
+                    Spacer(modifier = modifier.padding(vertical = 20.dp))
                 }
 
             }

@@ -84,12 +84,7 @@ fun education(modifier: Modifier) {
                 }
 
                 item {
-                    Spacer(modifier = modifier.padding(top = 10.dp))
-                }
-
-
-                item {
-                    Spacer(modifier = modifier.padding(vertical = 100.dp))
+                    Spacer(modifier = modifier.padding(top = 20.dp))
                 }
             }
         }

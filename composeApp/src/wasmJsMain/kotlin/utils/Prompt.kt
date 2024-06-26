@@ -12,14 +12,20 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.unit.dp
 
-@Deprecated("not using anywhere")
 @Composable
 fun showSnack(
     message: String? = null,
     onDismissed:(Boolean) -> Unit,
     modifier: Modifier = Modifier) {
+
+    val clipManager = LocalClipboardManager.current
+    val localUri = LocalUriHandler.current
+
 
     Snackbar (
         action = {},
@@ -52,10 +58,12 @@ fun showSnack(
 
             TextButton(
                 onClick = {
+                    clipManager.setText(buildAnnotatedString { append(message) })
+                    localUri.openUri("https://mail.google.com/mail/?view=cm&fs=1&to=pawarakshay13@gmail.com")
                     onDismissed(false)
                 }
             ) {
-                Text(text = "Close")
+                Text(text = "Mail Me")
             }
         }
     }

@@ -2,7 +2,6 @@ package pages
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -12,10 +11,10 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.PointerIcon
-import androidx.compose.ui.input.pointer.pointerHoverIcon
+import androidx.compose.ui.input.pointer.*
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -24,30 +23,33 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import common_ui.profileTooltip
 import common_ui.topMenu
+import utils.showSnack
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun homePage(
-    onNavigate: () -> Unit,
+    onNavigate: (Int, String) -> Unit,
     onViewResume: () -> Unit,
     modifier: Modifier = Modifier) {
 
     var gmail by remember { mutableStateOf(false) }
-    var images by remember { mutableStateOf(false) }
-    var appIcon by remember { mutableStateOf(false) }
     var profile by remember { mutableStateOf(false) }
 
+
+
+    var hoverOnSearchButton by remember { mutableStateOf(false) }
+    var hoverOnResumeButton by remember { mutableStateOf(false) }
+
     var inputSearch by remember { mutableStateOf("") }
-    var viewResumeSnack by remember { mutableStateOf(false) }
 
     val snackbarHostState = remember { SnackbarHostState() }
 
     Scaffold(
         snackbarHost = {
             SnackbarHost(snackbarHostState, modifier = modifier)
-        }
-    ) {
+        }) {
 
         Box (modifier = modifier
             .padding(it)
@@ -57,39 +59,33 @@ fun homePage(
             Box(
                 modifier= modifier.align(alignment = Alignment.TopEnd),
                 contentAlignment = Alignment.TopEnd) {
-                Column {
+
+                Column (modifier = modifier.padding(top = 10.dp, end = 10.dp)){
+
                     topMenu(
-                        onClickedGmail = { },
-                        onClickedImages = { images = true },
-                        onClickedAppIcon = { appIcon = true },
-                        onHoverProfile = {},
+                        onClickedGmail = { gmail = true },
+                        onClickedImages = { id ->
+                            onNavigate(id,inputSearch)
+                        },
+                        onClickedAppIcon = {},
+                        onHoverProfile = { doShow -> profile = doShow },
                         modifier = modifier
                     )
 
-                    if (!profile) {
-                        Column (modifier = modifier.padding(end = 10.dp)) {
-                            Column(
-                                modifier = modifier
-                                    .background(
-                                        color = Color.White,
-                                        shape = RoundedCornerShape(6.dp)
-                                    )
-                                    .padding(horizontal = 6.dp, vertical = 4.dp)
-                            ){
-                                Text(text = "Google Account")
-                                Text(text = "Akshay Pawar")
-                                Text(text = "pawarakshay13@gmail.com")
-                            }
+                    if (profile) {
+
+                        Column (modifier = modifier) {
+                            profileTooltip()
                         }
                     }
                 }
             }
 
+            //===================================================================================================CENTRAL
             Column (
-                modifier = modifier.align(alignment = Alignment.Center),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally) {
-
+                modifier = modifier
+                    .align(alignment = Alignment.Center)
+                    .padding(bottom = 100.dp)) {
                 Text (
                     text = "Google",
                     fontSize = 100.sp,
@@ -97,6 +93,7 @@ fun homePage(
                     color = Color.White,
                     modifier = modifier
                         .align(alignment = Alignment.CenterHorizontally)
+                        .padding(30.dp)
                 )
 
                 OutlinedTextField (
@@ -130,7 +127,7 @@ fun homePage(
                     },
                     keyboardActions = KeyboardActions(
                         onDone = {
-                            onNavigate()
+                            onNavigate(0,inputSearch)
                         }
                     ),
                     singleLine = true,
@@ -142,26 +139,50 @@ fun homePage(
                 Row (modifier = modifier
                     .align(alignment = Alignment.CenterHorizontally)
                     .padding(top = 20.dp)) {
-                    OutlinedButton(
-                        onClick = { onNavigate() },
+                    Button(
+                        onClick = { onNavigate(0,inputSearch) },
                         shape = RoundedCornerShape(6.dp),
-                        border = BorderStroke(width = 1.dp,
-                            color = Color(0XFFDFE1E5)
+                        border = BorderStroke(width = 0.5.dp,
+                            color = if(hoverOnSearchButton) Color.White else Color(0XFF303134)
                         ),
                         modifier = modifier
                             .padding(end = 6.dp)
-                            .pointerHoverIcon(icon = PointerIcon.Hand),
-                        enabled = inputSearch.isNotEmpty()
+                            .pointerHoverIcon(icon = PointerIcon.Hand)
+                            .onPointerEvent(
+                                eventType = PointerEventType.Enter,
+                                pass = PointerEventPass.Main) {
+                                hoverOnSearchButton = true
+
+                            }.onPointerEvent(
+                                eventType = PointerEventType.Exit,
+                                pass = PointerEventPass.Main) {
+                                hoverOnSearchButton = false
+                            },
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0XFF303134), disabledContainerColor = Color(0XFF303134)),
+                        enabled = inputSearch.isNotEmpty(),
                     ) {
                         Text(text = "Search Me", color = Color(0XFFDFE1E5))
                     }
 
-                    OutlinedButton(
+                    Button(
                         onClick = { onViewResume() },
                         shape = RoundedCornerShape(6.dp),
-                        border = BorderStroke(1.dp, color = Color.White),
+                        border = BorderStroke(
+                            width = 0.5.dp,
+                            color = if(hoverOnResumeButton) Color.White else Color(0XFF303134)
+                        ),
                         modifier = modifier.padding(start = 8.dp)
                             .pointerHoverIcon(icon = PointerIcon.Hand)
+                            .onPointerEvent(
+                                eventType = PointerEventType.Enter,
+                                pass = PointerEventPass.Main) {
+                                hoverOnResumeButton = true
+                            }.onPointerEvent(
+                                eventType = PointerEventType.Exit,
+                                pass = PointerEventPass.Main) {
+                                hoverOnResumeButton = false
+                            },
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0XFF303134))
                     ) {
                         Text(text = "View Resume", color = Color.White)
                     }
@@ -204,6 +225,7 @@ fun homePage(
                 }
             }
 
+            //===================================================================================================FOOTER
             Row (
                 modifier = modifier
                     .align(alignment = Alignment.BottomCenter)
@@ -230,6 +252,17 @@ fun homePage(
                     modifier = modifier.weight(1f),
                     textAlign = TextAlign.End
                 )
+            }
+
+
+            //SHow Snack
+            if (gmail) {
+                Box(modifier = modifier
+                    .align(alignment = Alignment.BottomCenter)
+                    .padding( bottom = 35.dp)
+                ) {
+                    showSnack(onDismissed = {gmail = false}, message = "pawarakshay13@gmail.com")
+                }
             }
         }
     }

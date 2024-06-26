@@ -1,3 +1,6 @@
+import java.net.URI
+import java.net.URL
+
 rootProject.name = "Aoogle"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 

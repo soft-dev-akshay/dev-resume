@@ -13,6 +13,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import aoogle.composeapp.generated.resources.Res
@@ -21,16 +23,14 @@ import org.jetbrains.compose.resources.painterResource
 import pages.homePage
 
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun topMenu(
     onClickedGmail: () -> Unit,
-    onClickedImages: () -> Unit,
+    onClickedImages: (Int) -> Unit,
     onClickedAppIcon: () -> Unit,
     onHoverProfile: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
-    interactionSrc: MutableInteractionSource = remember { MutableInteractionSource() }
-    ) {
+    interactionSrc: MutableInteractionSource = remember { MutableInteractionSource() }) {
 
     Row (verticalAlignment = Alignment.CenterVertically, modifier = modifier.padding(end = 10.dp)){
         Text(
@@ -39,15 +39,21 @@ fun topMenu(
             modifier = modifier
                 .padding(6.dp)
                 .clickable { onClickedGmail() }
+                .pointerHoverIcon(icon = PointerIcon.Hand)
         )
 
         Text(
             text = "Images",
             color = Color.White,
-            modifier = modifier.padding(6.dp).clickable { onClickedImages() }
+            modifier = modifier
+                .padding(6.dp)
+                .clickable { onClickedImages(4) }
+                .pointerHoverIcon(icon = PointerIcon.Hand)
         )
 
-        IconButton(onClick = { onClickedAppIcon() }) {
+        IconButton(
+            onClick = { onClickedAppIcon() },
+            modifier = modifier.pointerHoverIcon(icon = PointerIcon.Hand)) {
             Icon(
                 imageVector = Icons.Default.Apps,
                 contentDescription = null,
@@ -64,9 +70,9 @@ fun topMenu(
                 .size(30.dp)
                 .align(alignment = Alignment.CenterVertically)
                 .hoverable(interactionSrc,enabled = true)
+                .pointerHoverIcon(icon = PointerIcon.Hand)
         )
 
         onHoverProfile(interactionSrc.collectIsHoveredAsState().value)
-
     }
 }

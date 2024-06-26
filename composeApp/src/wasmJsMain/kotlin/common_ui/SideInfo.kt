@@ -16,6 +16,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.SpanStyle
@@ -30,6 +32,7 @@ import aoogle.composeapp.generated.resources.ic_globe_asia
 import data.SocialData
 import data.socials
 import org.jetbrains.compose.resources.painterResource
+import utils.getActualExperience
 import utils.getAge
 
 
@@ -102,7 +105,7 @@ fun sideInfo(modifier: Modifier = Modifier) {
                 Icon(
                     painter = painterResource(Res.drawable.ic_globe_asia),
                     contentDescription = "Globe Asia",
-                    modifier = modifier.size(24.dp),
+                    modifier = modifier.size(22.dp),
                     tint = Color.White
                 )
 
@@ -134,148 +137,216 @@ fun sideInfo(modifier: Modifier = Modifier) {
 
         Spacer(modifier = modifier.padding(6.dp))
 
-        Text(text = buildAnnotatedString {
-            withStyle(
-                SpanStyle(
-                    fontWeight = FontWeight.W800,
-                    color = Color.White
-                )
-            ) {
-                append("Born: ")
-            }
-            withStyle(style = SpanStyle(color = Color.White)) {
-                append("10 July 1996 (age ${getAge()} years), ")
-            }
-
-            withStyle(style = SpanStyle(color = Color(0XFF99C3FF))) {
-                append("Surat, Gujrat")
-            }
-        })
-
-        Spacer(modifier = modifier.padding(top = 6.dp))
-
-        Text(text = buildAnnotatedString {
-            withStyle(
-                SpanStyle(
-                    fontWeight = FontWeight.W800,
-                    color = Color.White
-                )
-            ) {
-                append("Education: ")
-            }
-            withStyle(style = SpanStyle(color = Color.White)) {
-                append("Bachelor Degree (IT), ")
-            }
-            withStyle(style = SpanStyle(color = Color(0XFF99C3FF))) {
-                append("Pune University (2019)")
-            }
-        })
+        Row {
+            Text(
+                text = "Born: ",
+                fontWeight = FontWeight.Bold,
+                color = Color.White)
+            Text(
+                text = "10 July 1996 (age ${getAge()} years), ",
+                color = Color.White
+            )
+            Text(
+                text = "Surat, Gujrat",
+                color = Color(0XFF99C3FF),
+                modifier = modifier.pointerHoverIcon(icon = PointerIcon.Hand).clickable {
+                    uriHandler.openUri("https://maps.app.goo.gl/Vq3CD4yDLS7xb3LG6")
+                }
+            )
+        }
 
         Spacer(modifier = modifier.padding(top = 6.dp))
 
-        Text(text = buildAnnotatedString {
-            withStyle(
-                SpanStyle(
-                    fontWeight = FontWeight.W800,
-                    color = Color.White
-                )
-            ) {
-                append("Experience: ")
-            }
-            withStyle(style = SpanStyle(color = Color.White)) {
-                append("3.5+ years in Native Android")
-            }
-        })
+        Row {
+            Text(
+                text = "Education: ",
+                fontWeight = FontWeight.Bold,
+                color = Color.White)
+            Text(
+                text = "Bachelor Degree (IT), ",
+                color = Color.White
+            )
+            Text(
+                text = "Pune University (2019)",
+                color = Color(0XFF99C3FF),
+                modifier = modifier.pointerHoverIcon(icon = PointerIcon.Hand).clickable {
+                    uriHandler.openUri("https://maps.app.goo.gl/RoRQ1v7V8ieN2TPr8")
+                }
+            )
+        }
 
         Spacer(modifier = modifier.padding(top = 6.dp))
 
-        Text(text = buildAnnotatedString {
-            withStyle(
-                SpanStyle(
-                    fontWeight = FontWeight.W800,
-                    color = Color.White
-                )
-            ) {
-                append("Awards: ")
-            }
-            withStyle(style = SpanStyle(color = Color.White)) {
-                append("3rd Rank in Class (2017)")
-            }
-        })
+        Row {
+            Text(
+                text = "Experience: ",
+                fontWeight = FontWeight.Bold,
+                color = Color.White)
+            Text(
+                text = "${getActualExperience()}+ years in Native Android",
+                color = Color.White
+            )
+        }
 
         Spacer(modifier = modifier.padding(top = 6.dp))
 
-        Text(text = buildAnnotatedString {
-            withStyle(
-                SpanStyle(
-                    fontWeight = FontWeight.W800,
-                    color = Color.White
-                )
-            ) {
-                append("Tech Stack: ")
-            }
-
-            withStyle(style = SpanStyle(color = Color(0XFF99C3FF))) {
-                append("Android, Kotlin, Ktor, Jetpack Compose, XML, DSA, ")
-            }
-
-            withStyle(style = SpanStyle(color = Color.White)) {
-                append("\nFirebase, RestAPI, MySQL")
-            }
-        })
+        Row {
+            Text(
+                text = "Awards: ",
+                fontWeight = FontWeight.Bold,
+                color = Color.White)
+            Text(
+                text = "3rd Rank in Class (2017)",
+                color = Color.White
+            )
+        }
 
         Spacer(modifier = modifier.padding(top = 6.dp))
 
-        Text(text = buildAnnotatedString {
-            withStyle(
-                SpanStyle(
-                    fontWeight = FontWeight.W800,
-                    color = Color.White
-                )
-            ) {
-                append("Android Apps: ")
-            }
+        Row {
+            Text(
+                text = "Tech Stack: ",
+                fontWeight = FontWeight.Bold,
+                color = Color.White)
 
-            withStyle(style = SpanStyle(color = Color(0XFF99C3FF))) {
-                append("Glasswing Partner, Sky Recharge, ERxPharma, M3 Compose, ")
-            }
+            Text(
+                text = "Android, ",
+                color = Color(0XFF99C3FF),
+                modifier = modifier.pointerHoverIcon(icon = PointerIcon.Hand).clickable {
+                    uriHandler.openUri("https://developer.android.com")
+                }
+            )
 
-            withStyle(style = SpanStyle(color = Color.White)) {
-                append("\nProject Mamta, Parrot4Business, CreditHive POS")
-            }
-        })
+            Text(
+                text = "Kotlin, ",
+                color = Color(0XFF99C3FF),
+                modifier = modifier.pointerHoverIcon(icon = PointerIcon.Hand).clickable {
+                    uriHandler.openUri("https://kotlinlang.org/")
+                }
+            )
+
+            Text(
+                text = "Ktor, ",
+                color = Color(0XFF99C3FF),
+                modifier = modifier.pointerHoverIcon(icon = PointerIcon.Hand).clickable {
+                    uriHandler.openUri("https://ktor.io/")
+                }
+            )
+
+            Text(
+                text = "Jetpack Compose, ",
+                color = Color(0XFF99C3FF),
+                modifier = modifier.pointerHoverIcon(icon = PointerIcon.Hand).clickable {
+                    uriHandler.openUri("https://developer.android.com/develop/ui/compose")
+                }
+            )
+
+            Text(
+                text = "XML, ",
+                color = Color(0XFF99C3FF),
+                modifier = modifier.pointerHoverIcon(icon = PointerIcon.Hand).clickable {
+                    uriHandler.openUri("https://en.wikipedia.org/wiki/XML")
+                }
+            )
+
+            Text(
+                text = "DSA, ",
+                color = Color(0XFF99C3FF),
+                modifier = modifier.pointerHoverIcon(icon = PointerIcon.Hand).clickable {
+                    uriHandler.openUri("https://techdevguide.withgoogle.com/paths/data-structures-and-algorithms/")
+                }
+            )
+        }
+        Row {
+            Text(
+                text = "Firebase, RestAPI, MySQL",
+                color = Color.White
+            )
+        }
 
         Spacer(modifier = modifier.padding(top = 6.dp))
 
-        Text(text = buildAnnotatedString {
-            withStyle(
-                SpanStyle(
-                    fontWeight = FontWeight.W800,
-                    color = Color.White
-                )
-            ) {
-                append("Area worked on: ")
-            }
-            withStyle(style = SpanStyle(color = Color.White)) {
-                append("Goods Delivery, Food and Drink, Food Delivery, Health, Finance, \nMedical, Educational")
-            }
-        })
+        Row {
+            Text(
+                text = "Android Apps: ",
+                fontWeight = FontWeight.Bold,
+                color = Color.White)
+
+            Text(
+                text = "Glasswing Partner, ",
+                color = Color(0XFF99C3FF),
+                modifier = modifier.pointerHoverIcon(icon = PointerIcon.Hand).clickable {
+                    uriHandler.openUri("https://play.google.com/store/apps/details?id=in.glasswing.partner")
+                }
+            )
+
+            Text(
+                text = "SKy Recharge, ",
+                color = Color(0XFF99C3FF),
+                modifier = modifier.pointerHoverIcon(icon = PointerIcon.Hand).clickable {
+                    uriHandler.openUri("https://play.google.com/store/apps/details?id=com.skyonlinerechargeservices")
+                }
+            )
+
+            Text(
+                text = "ERxPharmaPro, ",
+                color = Color(0XFF99C3FF),
+                modifier = modifier.pointerHoverIcon(icon = PointerIcon.Hand).clickable {
+                    uriHandler.openUri("https://play.google.com/store/apps/details?id=com.svsion.erxpharma")
+                }
+            )
+
+            Text(
+                text = "M3 Compose, ",
+                color = Color(0XFF99C3FF),
+                modifier = modifier.pointerHoverIcon(icon = PointerIcon.Hand).clickable {
+                    uriHandler.openUri("https://play.google.com/store/apps/details?id=com.codexdroid.m3compose")
+                }
+            )
+        }
+
+        Row {
+            Text(
+                text = "Project Mamta, Parrot4Business, CreditHive POS",
+                color = Color.White
+            )
+        }
 
         Spacer(modifier = modifier.padding(top = 6.dp))
 
-        Text(text = buildAnnotatedString {
-            withStyle(
-                SpanStyle(
-                    fontWeight = FontWeight.W800,
-                    color = Color.White
-                )
-            ) {
-                append("Interest: ")
-            }
-            withStyle(style = SpanStyle(color = Color.White)) {
-                append("Music, Coding, Driving, Gaming, Travelling, Shopping")
-            }
-        })
+        Row {
+            Text(
+                text = "Area worked on: ",
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
+            Text(
+                text = "Goods Delivery, Food and Drink, Food Delivery, Health, Finance",
+                color = Color.White
+            )
+        }
+        Row {
+            Text(
+                text = "Medical, Educational",
+                color = Color.White
+            )
+        }
+
+        Spacer(modifier = modifier.padding(top = 6.dp))
+
+        Row {
+            Text(
+                text = "Interest: ",
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
+
+            Text(
+                text = "Music, Coding, Driving, Gaming, Travelling, Shopping",
+                color = Color.White
+            )
+        }
+
 
         HorizontalDivider(
             color = Color(0XFF313335),
@@ -328,6 +399,7 @@ fun socialView(
         modifier = modifier
             .size(50.dp)
             .padding(horizontal = 8.dp)
+            .pointerHoverIcon(icon = PointerIcon.Hand)
             .clickable {
                 onIconClicked()
             }

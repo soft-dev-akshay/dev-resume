@@ -38,7 +38,7 @@ fun experienceItems(experienceData: ExperienceData, modifier: Modifier = Modifie
                 contentScale = ContentScale.Crop,
                 modifier = modifier
                     .clip(CircleShape)
-                    .size(30.dp)
+                    .size(24.dp)
             )
 
             Column(modifier = modifier.padding(horizontal = 10.dp)) {

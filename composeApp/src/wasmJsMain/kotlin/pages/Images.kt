@@ -21,8 +21,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import aoogle.composeapp.generated.resources.Res
-import aoogle.composeapp.generated.resources.logo_m3_compose
 import data.ImageData
 import data.imageList
 import org.jetbrains.compose.resources.painterResource
@@ -46,7 +44,7 @@ fun images(modifier: Modifier = Modifier) {
                 modifier = modifier
             ) {
 
-                items(imageList) { imageRes ->
+                items(imageList.shuffled()) { imageRes ->
 
                     Column(
                         modifier = modifier

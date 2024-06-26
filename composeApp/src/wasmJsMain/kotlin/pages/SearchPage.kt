@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
@@ -30,24 +31,29 @@ import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import common_ui.horizontalLine
+import common_ui.profileTooltip
 import common_ui.topMenu
 import data.SearchMenu
 import data.searchMenu
+import utils.showSnack
 
 @Composable
 fun searchPage(
     onNavigate: () -> Unit,
-    modifier: Modifier = Modifier) {
+    userInput: String,
+    modifier: Modifier = Modifier,
+    currentTabId: Int = 0) {
 
-    var inputSearch by remember { mutableStateOf("Akshay Pawar") }
-    var currentId by remember { mutableIntStateOf(0) }
+    var inputSearch by remember { mutableStateOf(userInput) }
+    var currentId by remember { mutableIntStateOf(currentTabId) }
+    var gmail by remember { mutableStateOf(false) }
+    var profile by remember { mutableStateOf(false) }
 
-    Column(modifier = modifier
+    Box(modifier = modifier
         .fillMaxSize()
         .background(color = Color(0XFF202124))) {
 
         //================================HEADER===================================
-
         Row (modifier = modifier.padding(top = 20.dp),
             verticalAlignment = Alignment.CenterVertically) {
 
@@ -68,9 +74,7 @@ fun searchPage(
                 .padding(start = 50.dp)
                 .background(color = Color(0XFF303134), shape = CircleShape)
                 .width(650.dp),
-                verticalAlignment = Alignment.CenterVertically
-
-            ) {
+                verticalAlignment = Alignment.CenterVertically) {
 
                 BasicTextField(
                     value = inputSearch,
@@ -124,75 +128,100 @@ fun searchPage(
                         }
                 )
             }
-
-            Spacer(modifier = modifier.weight(1f))
-
-            topMenu(
-                onClickedGmail = {},
-                onClickedImages = {},
-                onClickedAppIcon = {},
-                onHoverProfile = {})
         }
-
-        Spacer(modifier = modifier.padding(vertical = 10.dp))
 
         //================================MENU=====================================
-        LazyRow(modifier = modifier.padding(start = 200.dp)) {
-            items(searchMenu) {
+        Column {
+            LazyRow(modifier = modifier.padding(top = 80.dp,start = 200.dp)) {
+                items(searchMenu) {
                     menuItem(menu = it,
-                    currentId = currentId,
+                        currentId = currentId,
                         onMenuClicked = {id ->
-                        currentId = id
-                    })
+                            currentId = id
+                        })
+                }
             }
-        }
 
-        horizontalLine()
-        Column(modifier = modifier.padding(start = if (currentId != 4) 200.dp else 0.dp)) {
+            horizontalLine(modifier = modifier)
 
-            if (inputSearch.lowercase() != "akshay pawar") {
-                Row(modifier = modifier.padding(top = 20.dp)) {
+            Column(
+                modifier = modifier
+                    .padding(start = if (currentId != 4) 200.dp else 0.dp)) {
+                if (inputSearch.lowercase() != "akshay pawar") {
 
-                    Text(
-                        text = "Did you mean: ",
-                        color = Color(0xFFFF7769),
+                    Row(modifier = modifier.padding(top = 20.dp)) {
 
+                        Text(
+                            text = "Did you mean: ",
+                            color = Color(0xFFFF7769),
+
+                            )
+                        Text(
+                            text = "Akshay Pawar",
+                            color = Color(0XFF99C3FF),
+                            fontStyle = FontStyle.Italic,
+                            modifier = modifier
+                                .pointerHoverIcon(icon = PointerIcon.Hand)
+                                .clickable {
+                                    inputSearch = "Akshay Pawar"
+                                }
                         )
-                    Text(
-                        text = "Akshay Pawar",
-                        color = Color(0XFF99C3FF),
-                        fontStyle = FontStyle.Italic,
-                        modifier = modifier
-                            .pointerHoverIcon(icon = PointerIcon.Hand)
-                            .clickable {
-                                inputSearch = "Akshay Pawar"
-                            }
-                    )
+                    }
                 }
-            }
 
-            Row {
+                Row {
 
-                when(currentId) {
-                    1 -> {
-                        experience(modifier)
-                    }
-                    2 -> {
-                        project(modifier)
-                    }
-                    3 -> {
-                        education(modifier)
-                    }
-                    4 -> {
-                        images(modifier)
-                    }
-                    else -> {
-                        all(modifier)
+                    when(currentId) {
+                        1 -> {
+                            experience(modifier)
+                        }
+                        2 -> {
+                            project(modifier)
+                        }
+                        3 -> {
+                            education(modifier)
+                        }
+                        4 -> {
+                            images(modifier)
+                        }
+                        else -> {
+                            all(modifier = modifier)
+                        }
                     }
                 }
             }
         }
 
+        Box(modifier = modifier.align(alignment = Alignment.TopEnd).padding(top = 10.dp, end = 10.dp)) {
+            Column {
+
+                topMenu(
+                    onClickedGmail = { gmail = true },
+                    onClickedImages = {
+                        currentId = it
+                    },
+                    onClickedAppIcon = {},
+                    onHoverProfile = {
+                        profile = it
+                    }
+                )
+
+                if (profile) {
+                    profileTooltip()
+                }
+            }
+        }
+
+
+
+        //SHow Snack
+        if (gmail) {
+            Box(modifier = modifier
+                .align(alignment = Alignment.BottomCenter)
+                .padding( bottom = 35.dp)) {
+                showSnack(onDismissed = { gmail = false }, message = "pawarakshay13@gmail.com")
+            }
+        }
     }
 }
 
