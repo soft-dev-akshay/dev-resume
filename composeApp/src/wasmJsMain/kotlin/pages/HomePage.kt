@@ -46,28 +46,34 @@ fun homePage(
     Scaffold(
         snackbarHost = {
             SnackbarHost(snackbarHostState, modifier = modifier)
-        }) {
+        }
+    ) {
 
-        Column (modifier = modifier
+        Box (modifier = modifier
             .padding(it)
             .fillMaxSize()
             .background(color = Color(0XFF202124))) {
 
-            Box(modifier= modifier.align(alignment = Alignment.End)) {
+            Box(
+                modifier= modifier.align(alignment = Alignment.TopEnd),
+                contentAlignment = Alignment.TopEnd) {
                 Column {
                     topMenu(
                         onClickedGmail = { },
                         onClickedImages = { images = true },
                         onClickedAppIcon = { appIcon = true },
-                        onHoverProfile = { showTooltip -> profile = showTooltip },
+                        onHoverProfile = {},
                         modifier = modifier
                     )
 
-                    if (profile) {
+                    if (!profile) {
                         Column (modifier = modifier.padding(end = 10.dp)) {
                             Column(
                                 modifier = modifier
-                                    .background(color = Color.White, shape = RoundedCornerShape(6.dp))
+                                    .background(
+                                        color = Color.White,
+                                        shape = RoundedCornerShape(6.dp)
+                                    )
                                     .padding(horizontal = 6.dp, vertical = 4.dp)
                             ){
                                 Text(text = "Google Account")
@@ -79,128 +85,128 @@ fun homePage(
                 }
             }
 
+            Column (
+                modifier = modifier.align(alignment = Alignment.Center),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally) {
 
-
-
-            Text (
-                text = "Google",
-                fontSize = 100.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White,
-                modifier = modifier
-                    .align(alignment = Alignment.CenterHorizontally)
-                    .padding(top = 100.dp, bottom = 30.dp)
-            )
-
-            OutlinedTextField (
-                value = inputSearch,
-                placeholder = { Text("Search for me") },
-                onValueChange = { s -> inputSearch = s },
-                modifier = modifier.align(alignment = Alignment.CenterHorizontally)
-                    .width(800.dp)
-                    .padding(start = 60.dp, end = 60.dp),
-                shape = RoundedCornerShape(30.dp),
-                textStyle = TextStyle(
+                Text (
+                    text = "Google",
+                    fontSize = 100.sp,
+                    fontWeight = FontWeight.Bold,
                     color = Color.White,
-                    fontSize = 16.sp,
-                ),
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Search,
-                        contentDescription = null,
-                        tint = Color.White,
-                        modifier = modifier.padding(start = 16.dp)
-                    )
-                },
-                trailingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Mic,
-                        contentDescription = null,
-                        tint = Color.White,
-                        modifier = modifier.padding(end = 16.dp)
-                    )
-                },
-                keyboardActions = KeyboardActions(
-                    onDone = {
-                        onNavigate()
-                    }
-                ),
-                singleLine = true,
-                colors = TextFieldDefaults.outlinedTextFieldColors(
-                    focusedBorderColor = Color(0XFFDFE1E5)
-                ),
-            )
-
-            Row (modifier = modifier
-                .align(alignment = Alignment.CenterHorizontally)
-                .padding(top = 20.dp)
-            ) {
-                OutlinedButton(
-                    onClick = { onNavigate() },
-                    shape = RoundedCornerShape(6.dp),
-                    border = BorderStroke(width = 1.dp,
-                        color = Color(0XFFDFE1E5)
-                        ),
                     modifier = modifier
-                        .padding(end = 6.dp)
-                        .pointerHoverIcon(icon = PointerIcon.Hand),
-                    enabled = inputSearch.isNotEmpty()
-                ) {
-                    Text(text = "Search Me", color = Color(0XFFDFE1E5))
+                        .align(alignment = Alignment.CenterHorizontally)
+                )
+
+                OutlinedTextField (
+                    value = inputSearch,
+                    placeholder = { Text("Search for me") },
+                    onValueChange = { s -> inputSearch = s },
+                    modifier = modifier
+                        .align(alignment = Alignment.CenterHorizontally)
+                        .width(800.dp)
+                        .padding(start = 60.dp, end = 60.dp),
+                    shape = RoundedCornerShape(30.dp),
+                    textStyle = TextStyle(
+                        color = Color.White,
+                        fontSize = 16.sp,
+                    ),
+                    leadingIcon = {
+                        Icon(
+                            imageVector = Icons.Default.Search,
+                            contentDescription = null,
+                            tint = Color.White,
+                            modifier = modifier.padding(start = 16.dp)
+                        )
+                    },
+                    trailingIcon = {
+                        Icon(
+                            imageVector = Icons.Default.Mic,
+                            contentDescription = null,
+                            tint = Color.White,
+                            modifier = modifier.padding(end = 16.dp)
+                        )
+                    },
+                    keyboardActions = KeyboardActions(
+                        onDone = {
+                            onNavigate()
+                        }
+                    ),
+                    singleLine = true,
+                    colors = TextFieldDefaults.outlinedTextFieldColors(
+                        focusedBorderColor = Color(0XFFDFE1E5)
+                    ),
+                )
+
+                Row (modifier = modifier
+                    .align(alignment = Alignment.CenterHorizontally)
+                    .padding(top = 20.dp)) {
+                    OutlinedButton(
+                        onClick = { onNavigate() },
+                        shape = RoundedCornerShape(6.dp),
+                        border = BorderStroke(width = 1.dp,
+                            color = Color(0XFFDFE1E5)
+                        ),
+                        modifier = modifier
+                            .padding(end = 6.dp)
+                            .pointerHoverIcon(icon = PointerIcon.Hand),
+                        enabled = inputSearch.isNotEmpty()
+                    ) {
+                        Text(text = "Search Me", color = Color(0XFFDFE1E5))
+                    }
+
+                    OutlinedButton(
+                        onClick = { onViewResume() },
+                        shape = RoundedCornerShape(6.dp),
+                        border = BorderStroke(1.dp, color = Color.White),
+                        modifier = modifier.padding(start = 8.dp)
+                            .pointerHoverIcon(icon = PointerIcon.Hand)
+                    ) {
+                        Text(text = "View Resume", color = Color.White)
+                    }
                 }
 
-                OutlinedButton(
-                    onClick = { onViewResume() },
-                    shape = RoundedCornerShape(6.dp),
-                    border = BorderStroke(1.dp, color = Color.White),
-                    modifier = modifier.padding(start = 8.dp)
-                        .pointerHoverIcon(icon = PointerIcon.Hand)
-                ) {
-                    Text(text = "View Resume", color = Color.White)
+                Row (modifier = modifier
+                    .align(alignment = Alignment.CenterHorizontally)
+                    .padding(top = 20.dp)) {
+                    val str = buildAnnotatedString {
+                        withStyle(style = SpanStyle(color = Color.White)) {
+                            append("Google offered in:")
+                        }
+                        append("  ")
+
+                        withStyle(
+                            style = SpanStyle(
+                                color = Color(0XFF99C3FF),
+                                fontSize = 16.sp)){
+                            append("Marathi")
+                        }
+                        append("   ")
+
+                        withStyle(
+                            style = SpanStyle(
+                                color = Color(0XFF99C3FF),
+                                fontSize = 16.sp)){
+                            append("Hindi")
+                        }
+
+                        append("   ")
+
+                        withStyle(
+                            style = SpanStyle(
+                                color = Color(0XFF99C3FF),
+                                fontSize = 16.sp)){
+                            append("English")
+                        }
+                    }
+                    Text(text = str)
                 }
             }
-
-            Row (modifier = modifier
-                .align(alignment = Alignment.CenterHorizontally)
-                .padding(top = 20.dp)
-            ) {
-                val str = buildAnnotatedString {
-                    withStyle(style = SpanStyle(color = Color.White)) {
-                        append("Google offered in:")
-                    }
-                    append("  ")
-
-                    withStyle(
-                        style = SpanStyle(
-                            color = Color(0XFF99C3FF),
-                            fontSize = 16.sp)){
-                        append("Marathi")
-                    }
-                    append("   ")
-
-                    withStyle(
-                        style = SpanStyle(
-                            color = Color(0XFF99C3FF),
-                            fontSize = 16.sp)){
-                        append("Hindi")
-                    }
-
-                    append("   ")
-
-                    withStyle(
-                        style = SpanStyle(
-                            color = Color(0XFF99C3FF),
-                            fontSize = 16.sp)){
-                        append("English")
-                    }
-                }
-                Text(text = str)
-            }
-
-            Spacer(modifier = modifier.weight(1f))
 
             Row (
                 modifier = modifier
+                    .align(alignment = Alignment.BottomCenter)
                     .background(color = Color(0xFF313335))
                     .padding(10.dp),
             ) {
