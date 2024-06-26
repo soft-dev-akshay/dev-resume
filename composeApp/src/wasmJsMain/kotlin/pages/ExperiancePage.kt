@@ -14,6 +14,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import aoogle.composeapp.generated.resources.Res
+import aoogle.composeapp.generated.resources.map_experience
 import aoogle.composeapp.generated.resources.map_image
 import common_ui.*
 import data.*
@@ -68,7 +69,7 @@ fun experience(modifier: Modifier = Modifier) {
                 }
 
                 item {
-                    Image(painter = painterResource(Res.drawable.map_image),
+                    Image(painter = painterResource(Res.drawable.map_experience),
                         contentDescription = "",
                         modifier = modifier
                             .fillMaxWidth()

@@ -27,6 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import aoogle.composeapp.generated.resources.Res
+import aoogle.composeapp.generated.resources.map_all
 import aoogle.composeapp.generated.resources.map_image
 import common_ui.*
 import data.PageAllItemData
@@ -85,7 +86,7 @@ fun all(modifier: Modifier = Modifier) {
 
 
                 item {
-                    Image(painter = painterResource(Res.drawable.map_image),
+                    Image(painter = painterResource(Res.drawable.map_all),
                         contentDescription = "",
                         modifier = modifier
                             .fillMaxWidth()
