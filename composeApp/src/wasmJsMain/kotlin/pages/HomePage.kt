@@ -14,6 +14,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.Key.Companion.Enter
+import androidx.compose.ui.input.key.KeyEvent
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.input.pointer.*
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
@@ -103,7 +108,30 @@ fun homePage(
                     modifier = modifier
                         .align(alignment = Alignment.CenterHorizontally)
                         .width(800.dp)
-                        .padding(start = 60.dp, end = 60.dp),
+                        .padding(start = 60.dp, end = 60.dp).onKeyEvent {event ->
+                            if (inputSearch.isNotEmpty()) {
+                                if (event.key == Enter) {
+                                    val search = inputSearch.lowercase()
+                                    if (search.contains("experience")) {
+                                        onNavigate(1,inputSearch)
+                                    }
+                                    else if(search.contains("project") || search.contains("work")) {
+                                        onNavigate(2, inputSearch)
+                                    }
+                                    else if (search.contains("education") || search.contains("school") || search.contains("collage")) {
+                                        onNavigate(3,inputSearch)
+                                    }
+                                    else if (search.contains("image") || search.contains("photo") || search.contains("pics")) {
+                                        onNavigate(4,inputSearch)
+                                    }
+                                    else {
+                                        onNavigate(0,inputSearch)
+                                    }
+                                }
+                            }
+                            true
+
+                        },
                     shape = RoundedCornerShape(30.dp),
                     textStyle = TextStyle(
                         color = Color.White,

@@ -21,6 +21,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.key.Key.Companion.Enter
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.platform.LocalDensity
@@ -82,7 +85,31 @@ fun searchPage(
                     modifier = modifier
                         .padding(10.dp)
                         .padding(start = 10.dp)
-                        .weight(1f),
+                        .weight(1f)
+                        .onKeyEvent {event ->
+                            if (inputSearch.isNotEmpty()) {
+                                if (event.key == Enter) {
+                                    val search = inputSearch.lowercase()
+
+                                    if (search.contains("experience")) {
+                                        currentId = 1
+                                    }
+                                    else if(search.contains("project") || search.contains("work")) {
+                                        currentId = 2
+                                    }
+                                    else if (search.contains("education") || search.contains("school") || search.contains("collage")) {
+                                        currentId = 3
+                                    }
+                                    else if (search.contains("image") || search.contains("photo") || search.contains("pics")) {
+                                        currentId = 4
+                                    }
+                                    else {
+                                        currentId = 0
+                                    }
+                                }
+                            }
+                            true
+                        },
                     textStyle = TextStyle(color = Color.White, fontSize = 14.sp),
                     singleLine = true,
                     cursorBrush = Brush.linearGradient(listOf(Color.White, Color.White))
@@ -147,7 +174,23 @@ fun searchPage(
             Column(
                 modifier = modifier
                     .padding(start = if (currentId != 4) 200.dp else 0.dp)) {
-                if (inputSearch.lowercase() != "akshay pawar") {
+
+
+                val search = inputSearch.lowercase()
+                if (
+                    !search.contains("akshay") &&
+                    !search.contains("pawar") &&
+                    !search.contains("portfolio") &&
+                    !search.contains("experience") &&
+                    !search.contains("project") &&
+                    !search.contains("work") &&
+                    !search.contains("education") &&
+                    !search.contains("school") &&
+                    !search.contains("collage") &&
+                    !search.contains("image") &&
+                    !search.contains("photo") &&
+                    !search.contains("pics")) {
+
 
                     Row(modifier = modifier.padding(top = 20.dp)) {
 
